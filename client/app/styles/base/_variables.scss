@@ -1,0 +1,45 @@
+@use "./../helpers" as *;
+
+:root {
+  --color-light: #fff;
+  --color-light-alt: #f3f3f3;
+
+  --color-dark: #1e1e1e;
+
+  --color-opacity-85: rgba(0, 0, 0, 0.85);
+  --color-opacity-45: rgba(0, 0, 0, 0.45);
+  --color-opacity-25: rgba(0, 0, 0, 0.25);
+
+  --color-gray: #848388;
+  --color-gray-alt: #d9d9d9;
+  --color-gray-dark: #f7f5f8;
+
+  --color-error: #ff4d4f;
+  --color-valide: #40a9ff;
+
+	--color-modification: #faad14;
+	--color-modification-light: #f9f1e6;
+
+  --color-accent: #1890ff;
+
+  --font-family-base: "Inter" sans-serif;
+  --font-family-accent: "Roboto" sans-serif;
+
+  --container-width: #{rem(1335)};
+  --container-padding-x: #{rem(25)};
+
+  --button-height-large: #{rem(40)};
+	--button-height: #{rem(32)};
+  --button-height-small: #{rem(22)};
+
+	--border: #{rem(4)} solid currentColor;
+
+  --border-radius-large: #{rem(16)};
+  --border-radius: #{rem(8)};
+  --border-radius-small: #{rem(6)};
+  --border-radius-x-small: #{rem(2)};
+
+  --box-shadow: 0 #{rem(2)} 0 0 rgba(0, 0, 0, 0.02);
+
+  --transition-duration: 0.25s;
+}
