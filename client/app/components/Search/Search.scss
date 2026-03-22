@@ -1,0 +1,47 @@
+@use "~/styles/helpers" as *;
+
+.search {
+  width: 100%;
+  height: var(--button-height);
+  display: flex;
+  border-radius: var(--border-radius);
+  background-color: var(--color-gray-input);
+  position: relative;
+  margin-right: rem(24);
+
+  &__input {
+    width: 100%;
+    border: none;
+    background-color: inherit;
+    padding-left: rem(12);
+    border-radius: inherit;
+    font-family: var(--font-family-accent);
+    font-weight: 400;
+    font-size: rem(14);
+    line-height: 1.57;
+		outline: none;
+
+    &::placeholder {
+      color: var(--color-gray-placeholder);
+    }
+
+    &:focus {
+      outline: rem(1) solid var(--color-validate);
+    }
+  }
+
+  &__button {
+    @include button-reset;
+    @include flex-center(true);
+
+    width: rem(38);
+    height: 100%;
+    position: absolute;
+    right: 0;
+    z-index: 100;
+
+    & svg {
+      @include square(rem(14));
+    }
+  }
+}

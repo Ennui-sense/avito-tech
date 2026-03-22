@@ -1,0 +1,11 @@
+@use "~/styles/helpers" as *;
+
+.actions-panel {
+	&__inner {
+		padding: rem(12);
+    background-color: var(--color-light);
+		border-radius: var(--border-radius);
+		display: flex;
+		flex-wrap: nowrap;
+  }
+}

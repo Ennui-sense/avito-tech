@@ -1,0 +1,47 @@
+@use "~/styles/helpers" as *;
+
+.sort {
+  position: relative;
+  font-family: var(--font-family-accent);
+  font-weight: 400;
+  font-size: rem(14);
+  line-height: 1.57;
+  color: var(--color-opacity-85);
+	
+  &__button {
+		@include button-reset;
+    @include flex-center(true);
+		
+		width: rem(250);
+    background-color: var(--color-light);
+    border: var(--border);
+    border-color: var(--color-gray-input);
+    border-radius: var(--border-radius);
+    padding-inline: rem(12);
+    min-height: 100%;
+    text-wrap: nowrap;
+    column-gap: rem(8);
+
+		& svg {
+			@include square(rem(10));
+	
+			transform: rotate(180deg);
+			transition-duration: var(--transition-duration);
+		}
+
+		&.active {
+			& svg {
+				transform: rotate(0);
+			}
+		}
+  }
+
+
+
+  &__dropdown {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: translateY(100%);
+  }
+}

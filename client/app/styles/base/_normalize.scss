@@ -56,7 +56,7 @@ body,
   Убираем стандартный маркер маркированному списку,
   у которого есть атрибут class
  */
-:where(ul[class]) {
+:where(ul[class], ol[class]) {
   list-style: none;
 }
 
@@ -156,24 +156,24 @@ label {
   (за исключением тех, у которых уже указан
   атрибут fill со значением 'none' или начинается с 'url')
  */
-// :where([fill]:not(
-//   [fill="none"],
-//   [fill^="url"]
-// )) {
-//   fill: currentColor;
-// }
+:where([fill]:not(
+  [fill="none"],
+  [fill^="url"]
+)) {
+  fill: currentColor;
+}
 
 /**
   Приводим к единому цвету svg-элементы
   (за исключением тех, у которых уже указан
   атрибут stroke со значением 'none')
  */
-// :where([stroke]:not(
-//   [stroke="none"],
-//   [stroke^="url"]
-// )) {
-//   stroke: currentColor;
-// }
+:where([stroke]:not(
+  [stroke="none"],
+  [stroke^="url"]
+)) {
+  stroke: currentColor;
+}
 
 /**
   Чиним баг задержки смены цвета при взаимодействии с svg-элементами
@@ -203,4 +203,9 @@ svg * {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }

@@ -1,0 +1,7 @@
+@use "../helpers/" as *;
+
+.bg {
+	&__gray {
+		background-color: var(--color-gray-dark);
+	}
+}

@@ -11,19 +11,21 @@
   --color-opacity-25: rgba(0, 0, 0, 0.25);
 
   --color-gray: #848388;
-  --color-gray-alt: #d9d9d9;
   --color-gray-dark: #f7f5f8;
+  --color-gray-alt: #d9d9d9;
+	--color-gray-input: #f4f4f6;
+	--color-gray-placeholder: #707176;
 
   --color-error: #ff4d4f;
-  --color-valide: #40a9ff;
+  --color-validate: #40a9ff;
 
 	--color-modification: #faad14;
 	--color-modification-light: #f9f1e6;
 
   --color-accent: #1890ff;
 
-  --font-family-base: "Inter" sans-serif;
-  --font-family-accent: "Roboto" sans-serif;
+  --font-family-base: "Inter", sans-serif;
+  --font-family-accent: "Roboto", sans-serif;
 
   --container-width: #{rem(1335)};
   --container-padding-x: #{rem(25)};

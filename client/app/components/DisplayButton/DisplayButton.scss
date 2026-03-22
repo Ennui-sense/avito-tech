@@ -1,0 +1,18 @@
+@use "~/styles/helpers" as *;
+
+.display-button {
+  @include flex-center(true);
+  @include button-reset;
+  @include square(rem(32));
+
+  color: var(--color-dark);
+
+  & svg {
+    width: rem(14);
+    height: rem(14);
+  }
+
+  &.active {
+    color: var(--color-accent);
+  }
+}

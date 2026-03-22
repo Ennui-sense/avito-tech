@@ -1,0 +1,22 @@
+@use "~/styles/helpers" as *;
+
+.ads-header {
+  padding-block: rem(12) rem(16);
+  background-color: var(--color-gray-dark);
+
+  &__content {
+    padding-block: rem(12);
+    padding-left: rem(8);
+  }
+
+  &__title {
+    font-weight: 500;
+    font-size: rem(22);
+    line-height: 1.27;
+  }
+
+  &__count {
+    font-size: rem(18);
+    color: var(--color-gray);
+  }
+}

@@ -1,0 +1,22 @@
+@use "~/styles/helpers" as *;
+
+.display {
+	height: 100%;
+	background-color: var(--color-gray-input);
+	border-radius: var(--border-radius);
+	display: flex;
+	column-gap: rem(8);
+	position: relative;
+	margin-right: rem(16);
+
+	&::after {
+		content: "";
+		height: rem(28);
+		width: rem(2);
+		background-color: var(--color-light);
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%)
+	}
+}
