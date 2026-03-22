@@ -1,15 +1,21 @@
 @use "~/styles/helpers" as *;
 
 .sort-dropdown {
-  background-color: var(--color-light);
-  box-shadow: var(--box-shadow);
-  border-radius: var(--border-radius);
-  display: flex;
-  flex-direction: column;
-  row-gap: rem(5);
-  width: 100%;
-  align-items: start;
-	padding: rem(8);
+  height: 0;
+  overflow: hidden;
+  transition-duration: var(--transition-duration);
+
+  &__body {
+    background-color: var(--color-light);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(5);
+    width: 100%;
+    align-items: start;
+    padding: rem(8);
+  }
 
   &__button {
     @include button-reset;
@@ -18,7 +24,7 @@
     padding-inline: rem(12);
     text-wrap: nowrap;
     column-gap: rem(8);
-		width: 100%;
-		text-align: start;
+    width: 100%;
+    text-align: start;
   }
 }

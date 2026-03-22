@@ -17,12 +17,12 @@ const Sort = () => {
     (variant) => variant.id === 1,
   ) as ISortVariant;
 
-  const [OpenDropdown, setOpenDropdown] = useState<boolean>(false);
+  const [openDropdown, setOpenDropdown] = useState<boolean>(false);
   const [activeSortVariant, setActiveSortVariant] =
     useState<ISortVariant>(initialSortVariant);
 
   const manageDropdown = () => {
-    setOpenDropdown(!OpenDropdown);
+    setOpenDropdown(!openDropdown);
   };
 
   const chooseSort = (variant: ISortVariant) => {
@@ -34,19 +34,20 @@ const Sort = () => {
     <div className="sort">
       <button
         type="button"
-        className={clsx("sort__button", { active: OpenDropdown })}
+        className={clsx("sort__button", { active: openDropdown })}
         onClick={() => manageDropdown()}
       >
         {activeSortVariant.label}
         <ArrowTopIcon />
       </button>
-      {OpenDropdown && (
-        <SortDropdown
-          className="sort__dropdown"
-          onClick={chooseSort}
-          data={SortVariantsData}
-        />
-      )}
+			<SortDropdown
+				className="sort__dropdown"
+				onClick={chooseSort}
+				data={SortVariantsData}
+				isOpen={openDropdown}
+			/>
+      {/* {OpenDropdown && (
+      )} */}
     </div>
   );
 };

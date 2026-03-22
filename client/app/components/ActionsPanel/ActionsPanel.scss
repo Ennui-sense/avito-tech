@@ -1,6 +1,8 @@
 @use "~/styles/helpers" as *;
 
 .actions-panel {
+	margin-bottom: rem(16);
+	
 	&__inner {
 		padding: rem(12);
     background-color: var(--color-light);
