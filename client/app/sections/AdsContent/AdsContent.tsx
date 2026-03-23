@@ -2,7 +2,7 @@ import "./AdsContent.scss";
 
 import Filters from "~/components/Filters/Filters";
 import Catalog from "~/components/Catalog/Catalog";
-import type { CatalogItem } from "~/routes/ads";
+import type { CatalogItem } from "~/routes/ads._index";
 
 interface AdsContentProps {
   items: CatalogItem[];

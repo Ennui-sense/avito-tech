@@ -10,6 +10,7 @@ interface CatalogProductProps {
   price: number;
   needsRevision: boolean;
   className: string;
+  id: number;
 }
 
 const CATEGORY_LABELS = {
@@ -24,6 +25,7 @@ const CatalogProduct = ({
   price,
   needsRevision,
   className,
+  id,
 }: CatalogProductProps) => {
   const formatPrice = (price: number) => {
     return `${price} ₽`;
@@ -52,6 +54,8 @@ const CatalogProduct = ({
           <p className="catalog-product__revision">Требует доработок</p>
         )}
       </div>
+			
+      <a href={`/ads/${id}`} className="link">кликай</a>
     </article>
   );
 };
