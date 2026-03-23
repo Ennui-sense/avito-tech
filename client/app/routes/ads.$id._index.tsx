@@ -1,13 +1,71 @@
 import axios from "axios";
-
 import { useParams } from "react-router";
+
 import { useEffect, useState } from "react";
 
 import type { Item } from "~/../../server/src/types";
 
+import AdItemHeader from "~/components/AdItemHeader/AdItemHeader";
+import AdItemContent from "~/sections/AdItemContent/AdItemContent";
+
 export function meta() {
   return [{ name: "description", content: "Ad Item Page" }];
 }
+
+const FIELDS = {
+  auto: {
+    brand: "Бренд",
+    model: "Модель",
+    yearOfManufacture: "Год выпуска",
+    transmission: "Коробка передач",
+    mileage: "Пробег",
+    enginePower: "Мощность двигателя",
+  },
+  real_estate: {
+    type: "Тип",
+    address: "Адрес",
+    area: "Площадь",
+    floor: "Этаж",
+  },
+  electronics: {
+    type: "Тип",
+    brand: "Бренд",
+    model: "Модель",
+    condition: "Состояние",
+    color: "Цвет",
+  },
+};
+
+export type FieldInfo = {
+  key: string;
+  label: string;
+  value: unknown;
+};
+
+const sortFields = (item: Item) => {
+  const missingFields: FieldInfo[] = [];
+  const includedFields: FieldInfo[] = [];
+
+  const categoryFields = FIELDS[item.category];
+
+  Object.entries(categoryFields).forEach(([key, label]) => {
+    const value = item.params[key as keyof typeof item.params];
+
+    const field = {
+      key,
+      label,
+      value,
+    };
+
+    if (!value) {
+      missingFields.push(field);
+    } else {
+      includedFields.push(field);
+    }
+  });
+
+  return { missingFields, includedFields };
+};
 
 export default function AdDetailsRoute() {
   const { id } = useParams();
@@ -34,9 +92,7 @@ export default function AdDetailsRoute() {
   useEffect(() => {
     if (isLoading) {
       document.title = "Загрузка...";
-    }
-
-    if (item) {
+    } else if (item) {
       document.title = `Авито | ${item.title}`;
     }
   }, [item, isLoading]);
@@ -49,11 +105,28 @@ export default function AdDetailsRoute() {
     return <div>Объявление не найдено</div>;
   }
 
-  return (
-    <div className="ad-details">
-      <h1>{item.title}</h1>
+  const { missingFields, includedFields } = sortFields(item);
 
-      <a href={`/ads/${item.id}/edit`}>Редактировать</a>
-    </div>
+  console.log(missingFields);
+  console.log(includedFields);
+
+  return (
+    <>
+      <AdItemHeader
+        title={item.title}
+        createdAt={item.createdAt}
+        updatedAt={item.updatedAt}
+        id={item.id}
+        price={item.price}
+      />
+
+      <main>
+        <AdItemContent
+          missingFields={missingFields}
+          includedFields={includedFields}
+          description={item.description}
+        />
+      </main>
+    </>
   );
 }

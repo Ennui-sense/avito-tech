@@ -1,0 +1,49 @@
+@use "~/styles/helpers" as *;
+
+.ad-item-notification {
+  background-color: var(--color-revision-light);
+  padding: rem(12) rem(16);
+  width: rem(512);
+  display: flex;
+  column-gap: rem(16);
+  border-radius: var(--border-radius);
+  font-size: rem(14);
+  line-height: 1.57;
+  font-family: var(--font-family-accent);
+  box-shadow:
+    0 rem(9) rem(28) rem(8) rgba(0, 0, 0, 0.05),
+    0 rem(6) rem(16) 0 rgba(0, 0, 0, 0.08),
+    0 rem(3) rem(6) rem(-4) rgba(0, 0, 0, 0.12);
+  margin-bottom: rem(36);
+
+  & svg {
+    color: var(--color-revision);
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: rem(16);
+    line-height: 1.5;
+    margin-bottom: rem(4);
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    padding-left: rem(10);
+  }
+
+  &__item {
+    display: flex;
+    column-gap: rem(10);
+    align-items: center;
+
+    &::before {
+      @include square(rem(3));
+
+      content: "";
+      background-color: var(--color-dark);
+      border-radius: 50%;
+    }
+  }
+}

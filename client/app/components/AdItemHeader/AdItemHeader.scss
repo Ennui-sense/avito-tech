@@ -1,0 +1,53 @@
+@use "~/styles/helpers" as *;
+
+.ad-item-header {
+  margin-bottom: rem(36);
+
+  &__inner {
+		padding-block: rem(32);
+		position: relative;
+
+		&::after {
+			content: "";
+			width: calc(100% - var(--container-padding-x) * 2);
+			display: flex;
+			height: rem(1);
+			background-color: var(--color-gray-input);
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			bottom: 0;
+		}
+  }
+
+  &__top {
+    margin-bottom: rem(12);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title,
+  &__price {
+    font-size: rem(30);
+    font-family: var(--font-family-accent);
+    font-weight: 500;
+    line-height: 1.33;
+    color: var(--color-opacity-85);
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__time {
+    color: var(--color-gray);
+    text-align: end;
+  }
+
+  &__created {
+    margin-bottom: rem(4);
+  }
+}

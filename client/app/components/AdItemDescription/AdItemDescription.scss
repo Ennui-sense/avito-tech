@@ -1,0 +1,13 @@
+@use "~/styles/helpers" as *;
+
+.ad-item-description {
+  &__title {
+    font-size: rem(22);
+    line-height: 1.27;
+    margin-bottom: rem(16);
+  }
+
+	&__text {
+		max-width: rem(480);
+	}
+}

@@ -9,4 +9,17 @@
   color: var(--color-gray);
 	border-radius: var(--border-radius);
 	background-color: var(--color-light);
+	display: flex;
+	column-gap: rem(8);
+	padding-inline: rem(12);
+
+	&--accent {
+		background-color: var(--color-accent);
+		color: var(--color-light);
+	}
+
+	&--gray {
+		background-color: red;
+		color: var(--color-light);
+	}
 }
