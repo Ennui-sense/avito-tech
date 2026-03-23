@@ -40,14 +40,13 @@ const Sort = () => {
         {activeSortVariant.label}
         <ArrowTopIcon />
       </button>
-			<SortDropdown
-				className="sort__dropdown"
-				onClick={chooseSort}
-				data={SortVariantsData}
-				isOpen={openDropdown}
-			/>
-      {/* {OpenDropdown && (
-      )} */}
+      {openDropdown && (
+        <SortDropdown
+          className="sort__dropdown"
+          onClick={chooseSort}
+          data={SortVariantsData}
+        />
+      )}
     </div>
   );
 };

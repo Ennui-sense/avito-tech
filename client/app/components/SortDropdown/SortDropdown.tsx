@@ -1,49 +1,30 @@
-import clsx from "clsx";
 import "./SortDropdown.scss";
 
-import type { ISortVariant } from "~/data/SortVariantsData";
+import clsx from "clsx";
 
-import { useRef } from "react";
+import type { ISortVariant } from "~/data/SortVariantsData";
 
 interface SortDropdownProps {
   className?: string;
   onClick: (variant: ISortVariant) => void;
   data: ISortVariant[];
-  isOpen: boolean;
 }
 
-const SortDropdown = ({
-  className,
-  onClick,
-  data,
-  isOpen,
-}: SortDropdownProps) => {
-  const sortDropdownRef = useRef<HTMLDivElement | null>(null);
-
+const SortDropdown = ({ className, onClick, data }: SortDropdownProps) => {
   return (
     <div
-      className="sort-dropdown"
-      style={
-        isOpen
-          ? { height: sortDropdownRef.current?.scrollHeight }
-          : { height: "0px" }
-      }
+      className={clsx("sort-dropdown", className)}
     >
-      <div
-        className={clsx("sort-dropdown__body", className)}
-        ref={sortDropdownRef}
-      >
-        {data.map((variant) => (
-          <button
-            type="button"
-            className="sort-dropdown__button"
-            key={variant.id}
-            onClick={() => onClick(variant)}
-          >
-            {variant.label}
-          </button>
-        ))}
-      </div>
+      {data.map((variant) => (
+        <button
+          type="button"
+          className="sort-dropdown__button"
+          key={variant.id}
+          onClick={() => onClick(variant)}
+        >
+          {variant.label}
+        </button>
+      ))}
     </div>
   );
 };
