@@ -4,8 +4,16 @@ import { FiltersTypesData } from "~/data/FiltersTypesData";
 
 import FiltersType from "../FiltersType/FiltersType";
 import Button from "../Button/Button";
+import FiltersToggleButton from "../FiltersToggleButton/FiltersToggleButton";
+import { useState } from "react";
 
 const Filters = () => {
+  const [toggleActive, setToggleActive] = useState<boolean>(false);
+
+  const handleClick = () => {
+    setToggleActive(!toggleActive);
+  };
+
   return (
     <aside className="filters">
       <div className="filters__body">
@@ -17,13 +25,16 @@ const Filters = () => {
           ))}
         </div>
 
-				<div className="filters__toggle">
-					<p className="filters__toggle-text">Только требующие доработок</p>
-					<button type="button" className="filters__toggle-button">switch</button>
-				</div>
+        <div className="filters__toggle">
+          <p className="filters__toggle-text">Только требующие доработок</p>
+          <FiltersToggleButton
+            isActive={toggleActive}
+            onClick={() => handleClick()}
+          />
+        </div>
       </div>
 
-			<Button className="filters__button">Сбросить фильтры</Button>
+      <Button className="filters__button">Сбросить фильтры</Button>
     </aside>
   );
 };

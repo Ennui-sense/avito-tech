@@ -1,0 +1,36 @@
+@use "~/styles/helpers" as *;
+
+.filters-toggle-button {
+  @include button-reset;
+
+  width: rem(44);
+  height: rem(22);
+  border-radius: rem(23);
+  padding: rem(2);
+  background-color: var(--color-gray-alt);
+  flex-shrink: 0;
+  position: relative;
+
+  &.active {
+    background-color: var(--color-accent);
+    justify-content: end;
+
+    .filters-toggle-button__thumb {
+    	left: rem(24);
+    }
+  }
+
+  &__thumb {
+    @include square(rem(16));
+
+    border-radius: 50%;
+    background-color: var(--color-light);
+    z-index: 1;
+    box-shadow: 0 rem(2) rem(4) 0 rgba(0, 35, 11, 0.2);
+    position: absolute;
+    top: 50%;
+    left: rem(2);
+    transform: translateY(-50%);
+    transition-duration: var(--transition-duration);
+  }
+}
