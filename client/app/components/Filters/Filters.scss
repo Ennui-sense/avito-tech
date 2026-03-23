@@ -2,15 +2,16 @@
 
 .filters {
   color: var(--color-opacity-85);
+	width: rem(256);
 
   &__body {
-    width: rem(256);
     padding: rem(16);
     background-color: var(--color-light);
     border-radius: var(--border-radius);
     display: flex;
     flex-direction: column;
     row-gap: rem(10);
+		margin-bottom: rem(10);
   }
 
   &__title {
@@ -37,11 +38,15 @@
   &__toggle {
 		display: flex;
 		justify-content: space-between;
-		
+
     &-text {
       font-weight: 600;
       font-size: rem(14);
       line-height: 1.4;
     }
   }
+
+	&__button {
+		width: 100%;
+	}
 }

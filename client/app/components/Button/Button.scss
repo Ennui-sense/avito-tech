@@ -1,0 +1,12 @@
+@use "~/styles/helpers" as *;
+
+.button {
+  @include button-reset;
+  @include flex-center(true);
+
+  height: var(--button-height-large);
+  font-size: rem(14);
+  color: var(--color-gray);
+	border-radius: var(--border-radius);
+	background-color: var(--color-light);
+}

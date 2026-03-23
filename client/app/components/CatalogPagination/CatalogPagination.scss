@@ -1,0 +1,11 @@
+@use "~/styles/helpers" as *;
+
+.catalog-pagination {
+  display: flex;
+  column-gap: rem(8);
+
+  &__list {
+    display: flex;
+    column-gap: rem(8);
+  }
+}

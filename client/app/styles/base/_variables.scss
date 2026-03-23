@@ -19,8 +19,8 @@
   --color-error: #ff4d4f;
   --color-validate: #40a9ff;
 
-	--color-modification: #faad14;
-	--color-modification-light: #f9f1e6;
+	--color-revision: #faad14;
+	--color-revision-light: #f9f1e6;
 
   --color-accent: #1890ff;
 
@@ -32,7 +32,8 @@
 
   --button-height-large: #{rem(40)};
 	--button-height: #{rem(32)};
-  --button-height-small: #{rem(22)};
+	--button-height-small: #{rem(26)};
+  --button-height-x-small: #{rem(22)};
 
 	--border: #{rem(4)} solid currentColor;
 

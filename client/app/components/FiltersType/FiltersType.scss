@@ -9,14 +9,18 @@
     line-height: 1.57;
     font-size: rem(14);
     color: var(--color-opacity-85);
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-		&.active {
-			& svg {
-				transform: rotate(180deg);
-			}
-		}
+    & svg {
+      transform: rotate(180deg);
+    }
+
+    &.active {
+      & svg {
+        transform: rotate(0deg);
+      }
+    }
   }
 }

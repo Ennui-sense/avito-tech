@@ -1,0 +1,10 @@
+@use "~/styles/helpers" as *;
+
+.catalog {
+	&__list {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		gap: rem(10) rem(12);
+		margin-bottom: rem(10);
+	}
+}

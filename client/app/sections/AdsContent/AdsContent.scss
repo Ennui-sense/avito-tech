@@ -1,0 +1,8 @@
+@use "~/styles/helpers" as *;
+
+.ads-content {
+	&__inner {
+		display: flex;
+		column-gap: rem(24);
+	}
+}

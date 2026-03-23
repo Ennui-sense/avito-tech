@@ -1,0 +1,38 @@
+@use "~/styles/helpers" as *;
+
+.catalog-pagination-button {
+  @include square(var(--button-height));
+  @include flex-center(true);
+  @include button-reset;
+
+  border: rem(1) solid var(--color-gray-alt);
+  font-family: var(--font-family-accent);
+  font-weight: 400;
+  font-size: rem(14);
+  line-height: 1.57;
+  color: var(--color-opacity-85);
+  border-radius: var(--border-radius);
+
+  &--prev {
+    svg {
+      transform: rotate(270deg);
+    }
+  }
+
+  &--next {
+    svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  &--active {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    pointer-events: none;
+  }
+
+  &--disabled {
+    color: var(--color-gray-alt);
+    pointer-events: none;
+  }
+}

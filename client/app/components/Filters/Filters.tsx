@@ -3,6 +3,7 @@ import "./Filters.scss";
 import { FiltersTypesData } from "~/data/FiltersTypesData";
 
 import FiltersType from "../FiltersType/FiltersType";
+import Button from "../Button/Button";
 
 const Filters = () => {
   return (
@@ -21,6 +22,8 @@ const Filters = () => {
 					<button type="button" className="filters__toggle-button">switch</button>
 				</div>
       </div>
+
+			<Button className="filters__button">Сбросить фильтры</Button>
     </aside>
   );
 };

@@ -5,6 +5,13 @@ import AdsContent from "~/sections/AdsContent/AdsContent";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
+export interface CatalogItem {
+  category: "auto" | "electronics" | "real_estate";
+  title: string;
+  price: number;
+  needsRevision: boolean;
+};
+
 export function meta() {
   return [
     { title: "Авито | Каталог" },
@@ -12,29 +19,52 @@ export function meta() {
   ];
 }
 
+const LIMIT = 10;
+const API_URL = "http://localhost:8080/items";
+
 export default function AdsRoute() {
-  // const API_URL = "http://localhost:8080/items?limit=10&skip=20"
-  // const [data, setData] = useState<null | any>(null)
+  const [items, setItems] = useState<CatalogItem[]>([]);
+  const [total, setTotal] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // useEffect(() => {
-  // 	const getProducts = async () => {
-  // 		const res = await axios({
-  // 			url: API_URL
-  // 		})
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        setIsLoading(true);
 
-  // 		console.log(res.data);
+        const res = await axios.get(API_URL, {
+          params: {
+            limit: LIMIT,
+            skip: (currentPage - 1) * LIMIT,
+          },
+        });
 
-  // 	}
+        setItems(res.data.items);
+        setTotal(res.data.total);
+      } catch (error) {
+        console.error("Ошибка при получении данных:(", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  // 	getProducts()
-  // })
+    getProducts();
+  }, [currentPage]);
 
   return (
     <div className="bg__gray">
-      <AdsHeader />
+      <AdsHeader total={total} />
+
       <main>
         <ActionsPanel />
-        <AdsContent />
+        <AdsContent
+          items={items}
+          total={total}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+          isLoading={isLoading}
+        />
       </main>
     </div>
   );
