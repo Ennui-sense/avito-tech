@@ -36,10 +36,55 @@ const FIELDS = {
   },
 };
 
+const PARAMS = {
+  transmission: {
+    automatic: "Автомат",
+    manual: "Механика",
+  },
+  real_estate_type: {
+    flat: "Квартира",
+    house: "Дом",
+    room: "Комната",
+  },
+  electronics_type: {
+    phone: "Телефон",
+    laptop: "Ноутбук",
+    misc: "Разное",
+  },
+  condition: {
+    new: "Новое",
+    used: "Б/У",
+  },
+};
+
 export type FieldInfo = {
   key: string;
   label: string;
   value: unknown;
+};
+
+const formatValue = (value: unknown, key: string, category: string) => {
+  if (key === "transmision") {
+    return PARAMS.transmission[value as keyof typeof PARAMS.transmission];
+  }
+
+  if (key === "condition") {
+    return PARAMS.condition[value as keyof typeof PARAMS.condition];
+  }
+
+  if (key === "type" && category === "real_estate") {
+    return PARAMS.real_estate_type[
+      value as keyof typeof PARAMS.real_estate_type
+    ];
+  }
+
+  if (key === "type" && category === "electronics") {
+    return PARAMS.electronics_type[
+      value as keyof typeof PARAMS.electronics_type
+    ];
+  }
+
+  return value;
 };
 
 const sortFields = (item: Item) => {
@@ -49,7 +94,7 @@ const sortFields = (item: Item) => {
   const categoryFields = FIELDS[item.category];
 
   Object.entries(categoryFields).forEach(([key, label]) => {
-    const value = item.params[key as keyof typeof item.params];
+    const value = formatValue(item.params[key as keyof typeof item.params], key, item.category);
 
     const field = {
       key,
