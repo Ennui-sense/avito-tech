@@ -27,6 +27,7 @@ export default function AdsRoute() {
   const [total, setTotal] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [displayStyle, setDisplayStyle] = useState<"line" | "block">("block");
 
   useEffect(() => {
     const getProducts = async () => {
@@ -57,13 +58,14 @@ export default function AdsRoute() {
       <AdsHeader total={total} />
 
       <main>
-        <ActionsPanel />
+        <ActionsPanel onDisplayStyleChange={setDisplayStyle}/>
         <AdsContent
           items={items}
           total={total}
           currentPage={currentPage}
           onPageChange={setCurrentPage}
           isLoading={isLoading}
+					displayStyle={displayStyle}
         />
       </main>
     </div>

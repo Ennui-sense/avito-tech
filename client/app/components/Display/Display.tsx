@@ -6,20 +6,32 @@ import { DisplayButtonsData } from "~/data/DisplayButtonsData";
 
 import { useState } from "react";
 
-const Display = () => {
-	const [activeId, setActiveId] = useState<number>(1);
+import type { IDisplayButton } from "~/data/DisplayButtonsData";
 
-	const handleClick = (id: number) => {
-		setActiveId(id)
-	}
-
-	return (
-		<div className="display">
-			{DisplayButtonsData.map(({id, Icon}) => (
-				<DisplayButton key={id} Icon={Icon} onClick={() => handleClick(id)} active={activeId === id}/>
-			))}
-		</div>
-	)
+interface DisplayProps {
+  onDisplayStyleChange: (display: "line" | "block") => void;
 }
 
-export default Display
+const Display = ({ onDisplayStyleChange }: DisplayProps) => {
+  const [activeId, setActiveId] = useState<number>(1);
+
+  const handleClick = (button: IDisplayButton) => {
+    setActiveId(button.id);
+    onDisplayStyleChange(button.value);
+  };
+
+  return (
+    <div className="display">
+      {DisplayButtonsData.map((button) => (
+        <DisplayButton
+          key={button.id}
+          Icon={button.Icon}
+          onClick={() => handleClick(button)}
+          active={activeId === button.id}
+        />
+      ))}
+    </div>
+  );
+};
+
+export default Display;

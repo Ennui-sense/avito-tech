@@ -7,7 +7,11 @@ interface DisplayButtonProps {
   active: boolean;
 }
 
-const DisplayButton = ({ Icon, onClick, active }: DisplayButtonProps) => {
+const DisplayButton = ({
+  Icon,
+  onClick,
+  active,
+}: DisplayButtonProps) => {
   return (
     <button
       type="button"

@@ -13,7 +13,7 @@
   &__body {
     padding: rem(22) rem(16) rem(16);
     position: relative;
-		height: rem(135);
+		height: rem(160);
 		display: flex;
 		flex-direction: column;
   }
@@ -77,4 +77,28 @@
 			border-radius: 50%;
 		}
   }
+
+	&--line {
+		width: 100%;
+		display: flex;
+
+		.catalog-product__image {
+			width: rem(180);
+			height: 100%
+		}
+
+		.catalog-product__body {
+			padding: rem(16) rem(24);
+		}
+
+		.catalog-product__category {
+			position: relative;
+			margin-bottom: rem(4);
+			border: none;
+			padding: 0;
+			color: var(--color-gray);
+			top: 0;
+			left: 0;
+		}
+	}
 }

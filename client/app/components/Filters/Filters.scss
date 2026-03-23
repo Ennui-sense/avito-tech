@@ -3,6 +3,7 @@
 .filters {
   color: var(--color-opacity-85);
 	width: rem(256);
+	flex-shrink: 0;
 
   &__body {
     padding: rem(16);

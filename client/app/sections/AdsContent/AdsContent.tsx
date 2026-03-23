@@ -10,6 +10,7 @@ interface AdsContentProps {
   currentPage: number;
   onPageChange: (page: number) => void;
   isLoading: boolean;
+  displayStyle: "line" | "block";
 }
 
 const AdsContent = ({
@@ -18,6 +19,7 @@ const AdsContent = ({
   currentPage,
   onPageChange,
   isLoading,
+  displayStyle,
 }: AdsContentProps) => {
   return (
     <section className="ads-content">
@@ -33,6 +35,7 @@ const AdsContent = ({
           currentPage={currentPage}
           onPageChange={onPageChange}
           isLoading={isLoading}
+					displayStyle={displayStyle}
         />
       </div>
     </section>
