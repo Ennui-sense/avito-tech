@@ -19,7 +19,7 @@ const FIELDS = {
     yearOfManufacture: "Год выпуска",
     transmission: "Коробка передач",
     mileage: "Пробег",
-    enginePower: "Мощность двигателя",
+    enginePower: "Мощность",
   },
   real_estate: {
     type: "Тип",
@@ -64,7 +64,7 @@ export type FieldInfo = {
 };
 
 const formatValue = (value: unknown, key: string, category: string) => {
-  if (key === "transmision") {
+  if (key === "transmission") {
     return PARAMS.transmission[value as keyof typeof PARAMS.transmission];
   }
 
