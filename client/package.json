@@ -17,7 +17,6 @@
     "isbot": "^5.1.36",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-hook-form": "^7.72.0",
     "react-router": "7.13.1",
     "sass": "^1.98.0"
   },
