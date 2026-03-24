@@ -1,0 +1,59 @@
+@use "~/styles/helpers" as *;
+
+.select {
+  position: relative;
+  font-family: var(--font-family-accent);
+  font-weight: 400;
+  font-size: rem(14);
+  line-height: 1.57;
+  color: var(--color-opacity-85);
+
+  &__button {
+    @include button-reset;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: transparent;
+    border: rem(1) solid var(--color-gray-alt);
+    border-radius: var(--border-radius);
+    padding-inline: rem(12);
+    height: var(--button-height);
+    text-wrap: nowrap;
+
+    & svg {
+      @include square(rem(10));
+
+      transform: rotate(180deg);
+      transition-duration: var(--transition-duration);
+      color: var(--color-gray-alt);
+    }
+
+    &.active {
+      border-color: var(--color-validate);
+      box-shadow: 0 0 0 rem(2) rgba(24, 144, 255, 0.2);
+
+      & svg {
+        transform: rotate(0);
+      }
+    }
+
+    &:where(:not(.active)) {
+      @include hover(false) {
+        border-color: var(--color-dark);
+
+        & svg {
+          color: var(--color-dark);
+        }
+      }
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: translateY(100%);
+  }
+}

@@ -12,7 +12,7 @@ export function meta() {
   return [{ name: "description", content: "Ad Item Page" }];
 }
 
-const FIELDS = {
+export const FIELDS = {
   auto: {
     brand: "Бренд",
     model: "Модель",

@@ -1,0 +1,30 @@
+@use "~/styles/helpers" as *;
+
+.fieldset {
+  position: relative;
+
+  &:not(:last-of-type) {
+    &::after {
+      content: "";
+      width: 100%;
+      height: rem(1);
+      background-color: red;
+      position: absolute;
+      bottom: rem(-18);
+    }
+  }
+
+  &__legend {
+    font-weight: 600;
+    margin-bottom: rem(8);
+  }
+
+  &--category {
+		max-width: rem(256);
+	}
+
+	&--type,
+	&--condition {
+		max-width: rem(456);
+	}
+}

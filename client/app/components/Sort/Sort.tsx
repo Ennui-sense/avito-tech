@@ -8,25 +8,25 @@ import { useState } from "react";
 
 import clsx from "clsx";
 
-import { SortVariantsData } from "~/data/SortVariantsData";
+import { SortOptionsData } from "~/data/SortOptionsData";
 
-import type { ISortVariant } from "~/data/SortVariantsData";
+import type { ISortOption } from "~/data/SortOptionsData";
 
 const Sort = () => {
-  const initialSortVariant = SortVariantsData.find(
+  const initialSort = SortOptionsData.find(
     (variant) => variant.id === 1,
-  ) as ISortVariant;
+  ) as ISortOption;
 
   const [openDropdown, setOpenDropdown] = useState<boolean>(false);
-  const [activeSortVariant, setActiveSortVariant] =
-    useState<ISortVariant>(initialSortVariant);
+  const [activeSort, setActiveSort] =
+    useState<ISortOption>(initialSort);
 
   const manageDropdown = () => {
     setOpenDropdown(!openDropdown);
   };
 
-  const chooseSort = (variant: ISortVariant) => {
-    setActiveSortVariant(variant);
+  const chooseSort = (sort: ISortOption) => {
+    setActiveSort(sort);
     setOpenDropdown(false);
   };
 
@@ -37,14 +37,14 @@ const Sort = () => {
         className={clsx("sort__button", { active: openDropdown })}
         onClick={() => manageDropdown()}
       >
-        {activeSortVariant.label}
+        {activeSort.label}
         <ArrowTopIcon />
       </button>
       {openDropdown && (
         <SortDropdown
           className="sort__dropdown"
           onClick={chooseSort}
-          data={SortVariantsData}
+          data={SortOptionsData}
         />
       )}
     </div>

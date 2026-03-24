@@ -2,12 +2,12 @@ import "./SortDropdown.scss";
 
 import clsx from "clsx";
 
-import type { ISortVariant } from "~/data/SortVariantsData";
+import type { ISortOption } from "~/data/SortOptionsData";
 
 interface SortDropdownProps {
   className?: string;
-  onClick: (variant: ISortVariant) => void;
-  data: ISortVariant[];
+  onClick: (option: ISortOption) => void;
+  data: ISortOption[];
 }
 
 const SortDropdown = ({ className, onClick, data }: SortDropdownProps) => {

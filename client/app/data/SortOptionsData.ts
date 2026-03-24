@@ -1,10 +1,10 @@
-export interface ISortVariant {
+export interface ISortOption {
 	id: number;
 	label: string;
 	value: string;
 }
 
-export const SortVariantsData: ISortVariant[] = [
+export const SortOptionsData: ISortOption[] = [
 	{
 		id: 1,
 		label: "По новизне (сначала новые)",

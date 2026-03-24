@@ -1,0 +1,29 @@
+@use "~/styles/helpers" as *;
+
+.select-dropdown {
+	background-color: var(--color-light);
+	box-shadow: var(--box-shadow);
+	border-radius: var(--border-radius);
+	display: flex;
+	flex-direction: column;
+	row-gap: rem(5);
+	width: 100%;
+	align-items: start;
+	padding: rem(8);
+	z-index: 100;
+
+  &__button {
+    @include button-reset;
+
+    background-color: var(--color-light);
+    padding-inline: rem(12);
+    text-wrap: nowrap;
+    column-gap: rem(8);
+    width: 100%;
+    text-align: start;
+
+		@include hover(false) {
+			opacity: 0.6;
+		}
+  }
+}
