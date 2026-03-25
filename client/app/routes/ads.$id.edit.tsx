@@ -221,8 +221,6 @@ export default function AdEditRoute() {
 
       const payload = convertFormDataToPut(formData);
 
-      console.log("sending price payload", payload);
-
       const res = await axios.post(
         "http://localhost:8080/ai/price-suggestion",
         {
@@ -250,8 +248,6 @@ export default function AdEditRoute() {
       setDescriptionSuggestion(null);
 
       const payload = convertFormDataToPut(formData);
-
-      console.log("sending description payload", payload);
 
       const res = await axios.post(
         "http://localhost:8080/ai/description-suggestion",

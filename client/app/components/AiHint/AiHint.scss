@@ -2,8 +2,9 @@
 
 .ai-hint {
   position: relative;
-
+	
   &__suggestion {
+		background-color: var(--color-light);
     box-shadow: 0 rem(2) rem(8) 0 rgba(0, 0, 0, 0.15);
     position: absolute;
     top: 0;

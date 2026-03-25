@@ -1,10 +1,11 @@
 @use "~/styles/helpers" as *;
 
 .ad-edit-content {
-  &__form {
-    display: flex;
+	&__form {
+		display: flex;
     flex-direction: column;
     row-gap: rem(36);
+		z-index: -100;
 		
     & > :not(:nth-last-child(2)):not(:last-child) {
 			position: relative;
@@ -41,6 +42,12 @@
     &:has(.input__error) {
       align-items: center;
     }
+  }
+
+  &__manage-description {
+    display: flex;
+		flex-direction: column;
+    row-gap: rem(8);
   }
 
   &__actions {
