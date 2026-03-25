@@ -10,6 +10,7 @@
 	width: 100%;
 	align-items: start;
 	padding: rem(8);
+	z-index: 100;
 
   &__button {
     @include button-reset;

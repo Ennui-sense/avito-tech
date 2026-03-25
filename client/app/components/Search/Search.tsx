@@ -11,14 +11,18 @@ import { useState } from "react";
 const Search = () => {
   const [value, setValue] = useState<string>("");
   const dispatch = useAppDispatch();
-  const search = useAppSelector((state) => state.catalog.search);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
 
+  const handleSubmit = (event: React.SubmitEvent) => {
+    event.preventDefault();
+    dispatch(setSearch(value));
+  };
+
   return (
-    <form className="search">
+    <form className="search" onSubmit={handleSubmit}>
       <input
         className="search__input"
         type="text"

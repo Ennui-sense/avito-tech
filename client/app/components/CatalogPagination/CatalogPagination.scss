@@ -3,6 +3,7 @@
 .catalog-pagination {
   display: flex;
   column-gap: rem(8);
+	margin-bottom: rem(16);
 
   &__list {
     display: flex;

@@ -5,6 +5,7 @@
   background-color: var(--color-light);
   border-radius: var(--border-radius);
 	height: 100%;
+	position: relative;
 
   &__image {
     border-radius: inherit;
@@ -78,17 +79,18 @@
 		}
   }
 
+	&__link {
+		position: absolute;
+		inset: 0;
+	}
+
 	&--line {
 		width: 100%;
 		display: flex;
 
-		.catalog-product__image {
-			width: rem(180);
-			height: 100%
-		}
-
 		.catalog-product__body {
 			padding: rem(16) rem(24);
+			height: rem(135);
 		}
 
 		.catalog-product__category {

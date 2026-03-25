@@ -29,14 +29,19 @@ const AdsContent = ({
 
       <div className="ads-content__inner container">
         <Filters />
-        <Catalog
-          items={items}
-          total={total}
-          currentPage={currentPage}
-          onPageChange={onPageChange}
-          isLoading={isLoading}
-					displayStyle={displayStyle}
-        />
+
+        {total === 0 ? (
+          <p className="ads-content__text">Объявлений не найдено</p>
+        ) : (
+          <Catalog
+            items={items}
+            total={total}
+            currentPage={currentPage}
+            onPageChange={onPageChange}
+            isLoading={isLoading}
+            displayStyle={displayStyle}
+          />
+        )}
       </div>
     </section>
   );

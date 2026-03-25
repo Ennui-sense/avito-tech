@@ -55,7 +55,7 @@ const CatalogProduct = ({
         )}
       </div>
 			
-      <a href={`/ads/${id}`} className="link">кликай</a>
+      <a href={`/ads/${id}`} className="catalog-product__link"></a>
     </article>
   );
 };
