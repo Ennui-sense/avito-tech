@@ -16,6 +16,8 @@
         background-color: var(--color-gray-input);
         position: absolute;
         bottom: rem(-18);
+				display: flex;
+				z-index: -1;
       }
     }
   }
@@ -33,6 +35,7 @@
 
   &__manage-price {
     display: flex;
+		column-gap: rem(24);
     align-items: end;
 
     &:has(.input__error) {
@@ -43,5 +46,12 @@
   &__actions {
     display: flex;
     column-gap: rem(10);
+
+		&-notification {
+			position: absolute;
+			top: rem(40);
+			right: 0;
+
+		}
   }
 }

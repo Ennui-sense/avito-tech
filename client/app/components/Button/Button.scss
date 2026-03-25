@@ -14,26 +14,29 @@
   column-gap: rem(8);
   padding-inline: rem(12);
   color: var(--color-opacity-85);
-	font-weight: 400;
+  font-weight: 400;
 
   &--accent {
     background-color: var(--color-accent);
     color: var(--color-light);
+    border: none;
   }
 
   &--gray {
     background-color: var(--color-gray-alt);
     color: var(--color-gray);
+    border: none;
   }
 
   &--yellow {
-    background-color: var(--color-revision);
-    color: var(--color-revision-light);
+    background-color: var(--color-revision-light);
+    color: var(--color-revision);
+    border: none;
   }
 
   &--large {
     height: var(--button-height-large);
-		font-size: rem(16);
+    font-size: rem(16);
   }
 
   &--small {

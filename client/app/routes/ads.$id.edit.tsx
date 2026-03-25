@@ -189,7 +189,7 @@ export default function AdEditRoute() {
       await axios.put(`http://localhost:8080/items/${id}`, put);
 
       setSaveStatus({
-        type: "error",
+        type: "success",
         message: "Изменение сохранены",
       });
 

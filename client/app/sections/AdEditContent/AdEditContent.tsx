@@ -15,6 +15,7 @@ import Input from "~/components/Input/Input";
 import Select from "~/components/Select/Select";
 import PriceAi from "~/components/PriceAi/PriceAi";
 import Button from "~/components/Button/Button";
+import Notification from "~/components/Notification/Notification";
 
 interface AdEditContentProps {
   formData: FormDataType;
@@ -154,17 +155,18 @@ const AdEditContent = ({
 
           <div className="ad-edit-content__actions">
             {saveStatus && (
-              <div
-                className={`ad-edit-content__notice ad-edit-content__notice--${saveStatus.type}`}
-              >
-                {saveStatus.message}
-              </div>
+              <Notification
+                className="ad-edit-content__actions-notification"
+                type={saveStatus.type}
+                message={saveStatus.message}
+              />
             )}
+
             <Button
               variant="accent"
               size="large"
               className="ad-edit-content__action-button"
-							disabled={!isFormChanged || isSaving}
+              disabled={!isFormChanged || isSaving}
               onClick={onSave}
             >
               {isSaving ? "Сохранение..." : "Сохранить"}

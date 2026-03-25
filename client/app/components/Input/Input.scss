@@ -19,6 +19,10 @@
     font-size: rem(12);
     color: var(--color-error);
     line-height: 1.67;
+		
+    .input__field-input {
+      border-color: var(--color-error);
+    }
   }
 
   &__field {
@@ -36,7 +40,7 @@
 
     &--textarea {
       width: rem(950);
-			min-height: rem(60);
+      min-height: rem(60);
 
       .input__field-input {
         resize: vertical;

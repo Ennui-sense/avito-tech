@@ -3,6 +3,7 @@ import Button from "../Button/Button";
 
 import LightBulbIcon from "~/assets/icons/light-bulb.svg?react";
 import AgainIcon from "~/assets/icons/again.svg?react";
+import LoadingIcon from "~/assets/icons/loading.svg?react";
 
 interface PriceAiProps {
   onSuggestPrice: () => void;
@@ -29,7 +30,7 @@ const PriceAi = ({
           priceSuggestion
             ? AgainIcon
             : isSuggestingPrice
-              ? LightBulbIcon
+              ? LoadingIcon
               : LightBulbIcon
         }
         variant="yellow"
