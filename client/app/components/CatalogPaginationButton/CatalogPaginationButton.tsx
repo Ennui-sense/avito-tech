@@ -24,6 +24,7 @@ const CatalogPaginationButton = ({
   return (
     <button
       type="button"
+			disabled={isDisabled}
       className={clsx("catalog-pagination-button", {
         "catalog-pagination-button--prev": isPrev,
         "catalog-pagination-button--next": isNext,

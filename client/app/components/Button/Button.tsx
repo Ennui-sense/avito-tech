@@ -9,6 +9,7 @@ interface ButtonProps {
   href?: string;
   isEdit?: boolean;
   variant?: "accent" | "gray";
+	onClick?: () => void;
 }
 
 const Button = ({
@@ -17,6 +18,7 @@ const Button = ({
   href,
   isEdit,
   variant,
+	onClick
 }: ButtonProps) => {
   return href ? (
     <a href={href} className={clsx("button", className, `button--${variant}`)}>
@@ -28,6 +30,7 @@ const Button = ({
     <button
       type="button"
       className={clsx("button", className, `button--${variant}`)}
+			onClick={onClick}
     >
       {children}
 

@@ -8,13 +8,14 @@ import {
 } from "react-router";
 
 import type { Route } from "./+types/root";
-import "~/styles/main.scss"
+import "~/styles/main.scss";
+import { store } from "~/store/store";
+import { Provider } from "react-redux";
 // import stylesheet from "./styles/main.scss?url";
 
 // export const links: Route.LinksFunction = () => [
 //   { rel: "stylesheet", href: stylesheet },
 // ];
-
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -22,7 +23,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-				<link rel="shortcut icon" href="https://www.avito.st/dstatic/favicon.ico" type="image/x-icon"></link>
+        <link
+          rel="shortcut icon"
+          href="https://www.avito.st/dstatic/favicon.ico"
+          type="image/x-icon"
+        ></link>
         <Meta />
         <Links />
       </head>
@@ -36,7 +41,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <Provider store={store}>
+      <Outlet />;
+    </Provider>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

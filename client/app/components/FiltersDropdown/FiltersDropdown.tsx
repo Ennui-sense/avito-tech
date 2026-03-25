@@ -31,9 +31,11 @@ const FiltersDropdown = ({ onClick, data, isOpen }: FiltersDropdownProps) => {
               name={filter.value}
               id={filter.value}
               className="filter-dropdown__input"
-							onClick={() => onClick(filter)}
+              onClick={() => onClick(filter)}
             />
-            <label htmlFor={filter.value} className="filter-dropdown__label">{filter.label}</label>
+            <label htmlFor={filter.value} className="filter-dropdown__label">
+              {filter.label}
+            </label>
           </div>
         ))}
       </div>

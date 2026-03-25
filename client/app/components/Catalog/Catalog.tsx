@@ -2,7 +2,7 @@ import "./Catalog.scss";
 
 import CatalogPagination from "../CatalogPagination/CatalogPagination";
 import CatalogProduct from "../CatalogProduct/CatalogProduct";
-import type { CatalogItem } from "~/routes/ads._index";
+import type { CatalogItem } from "~/types";
 import clsx from "clsx";
 
 interface CatalogProps {
@@ -29,7 +29,7 @@ const Catalog = ({
   return (
     <div className="catalog">
       <ul className={clsx("catalog__list", `catalog__list--${displayStyle}`)}>
-        {items.map(({ category, title, price, needsRevision }, index) => (
+        {items.map(({ category, title, price, needsRevision, id }) => (
           <li className="catalog__item" key={title}>
             <CatalogProduct
               category={category}
@@ -37,7 +37,7 @@ const Catalog = ({
               price={price}
               needsRevision={needsRevision}
               className={`catalog-product--${displayStyle}`}
-              id={index + 1}
+              id={id}
             />
           </li>
         ))}

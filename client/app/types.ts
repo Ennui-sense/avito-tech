@@ -44,6 +44,14 @@ type ElectronicsItemParams = {
   color?: string;
 };
 
+export type CatalogItem = {
+  category: "auto" | "electronics" | "real_estate";
+  title: string;
+  price: number;
+  needsRevision: boolean;
+	id: number
+};
+
 export type FormDataType = {
   category: Item["category"];
   title: string;

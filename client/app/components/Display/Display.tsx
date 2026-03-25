@@ -1,23 +1,19 @@
 import "./Display.scss";
 
 import DisplayButton from "../DisplayButton/DisplayButton";
-
 import { DisplayButtonsData } from "~/data/DisplayButtonsData";
 
-import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "~/hooks/redux";
+import { setDisplayStyle } from "~/store/catalogSlice";
 
 import type { IDisplayButton } from "~/data/DisplayButtonsData";
 
-interface DisplayProps {
-  onDisplayStyleChange: (display: "line" | "block") => void;
-}
-
-const Display = ({ onDisplayStyleChange }: DisplayProps) => {
-  const [activeId, setActiveId] = useState<number>(1);
+const Display = () => {
+  const dispatch = useAppDispatch();
+  const displayStyle = useAppSelector((state) => state.catalog.displayStyle);
 
   const handleClick = (button: IDisplayButton) => {
-    setActiveId(button.id);
-    onDisplayStyleChange(button.value);
+    dispatch(setDisplayStyle(button.value));
   };
 
   return (
@@ -27,7 +23,7 @@ const Display = ({ onDisplayStyleChange }: DisplayProps) => {
           key={button.id}
           Icon={button.Icon}
           onClick={() => handleClick(button)}
-          active={activeId === button.id}
+          active={displayStyle === button.value}
         />
       ))}
     </div>

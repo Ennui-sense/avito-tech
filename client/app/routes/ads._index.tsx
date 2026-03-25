@@ -5,12 +5,12 @@ import AdsContent from "~/sections/AdsContent/AdsContent";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export interface CatalogItem {
-  category: "auto" | "electronics" | "real_estate";
-  title: string;
-  price: number;
-  needsRevision: boolean;
-};
+import { getSortParams } from "~/utils/catalogConfig";
+
+import { useAppDispatch, useAppSelector } from "~/hooks/redux";
+import { setCurrentPage } from "~/store/catalogSlice";
+
+import type { CatalogItem } from "~/types";
 
 export function meta() {
   return [
@@ -23,23 +23,41 @@ const LIMIT = 10;
 const API_URL = "http://localhost:8080/items";
 
 export default function AdsRoute() {
+  const dispatch = useAppDispatch();
+
+  const { search, categories, needsRevision, sort, currentPage, displayStyle } =
+    useAppSelector((state) => state.catalog);
+
   const [items, setItems] = useState<CatalogItem[]>([]);
   const [total, setTotal] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [displayStyle, setDisplayStyle] = useState<"line" | "block">("block");
 
   useEffect(() => {
     const getProducts = async () => {
       try {
         setIsLoading(true);
 
-        const res = await axios.get(API_URL, {
-          params: {
-            limit: LIMIT,
-            skip: (currentPage - 1) * LIMIT,
-          },
-        });
+        const sortParams = getSortParams(sort);
+
+        const params: Record<string, string | number | boolean | undefined> = {
+          limit: LIMIT,
+          skip: (currentPage - 1) * LIMIT,
+          ...sortParams,
+        };
+
+        if (search.trim()) {
+          params.q = search.trim();
+        }
+
+        if (categories.length) {
+          params.categories = categories.join(",");
+        }
+
+        if (needsRevision) {
+          params.needsRevision = true;
+        }
+
+        const res = await axios.get(API_URL, { params });
 
         setItems(res.data.items);
         setTotal(res.data.total);
@@ -51,21 +69,21 @@ export default function AdsRoute() {
     };
 
     getProducts();
-  }, [currentPage]);
+  }, [search, categories, needsRevision, sort, currentPage]);
 
   return (
     <div className="bg__gray">
       <AdsHeader total={total} />
 
       <main>
-        <ActionsPanel onDisplayStyleChange={setDisplayStyle}/>
+        <ActionsPanel />
         <AdsContent
           items={items}
           total={total}
           currentPage={currentPage}
-          onPageChange={setCurrentPage}
+          onPageChange={(page) => dispatch(setCurrentPage(page))}
           isLoading={isLoading}
-					displayStyle={displayStyle}
+          displayStyle={displayStyle}
         />
       </main>
     </div>

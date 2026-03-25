@@ -2,7 +2,7 @@ import "./AdsContent.scss";
 
 import Filters from "~/components/Filters/Filters";
 import Catalog from "~/components/Catalog/Catalog";
-import type { CatalogItem } from "~/routes/ads._index";
+import type { CatalogItem } from "~/types";
 
 interface AdsContentProps {
   items: CatalogItem[];
@@ -23,7 +23,7 @@ const AdsContent = ({
 }: AdsContentProps) => {
   return (
     <section className="ads-content">
-      <h2 className="ads-content___title visually-hidden">
+      <h2 className="ads-content__title visually-hidden">
         Список моих объявлений
       </h2>
 
