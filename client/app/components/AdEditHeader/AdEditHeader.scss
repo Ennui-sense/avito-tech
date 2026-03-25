@@ -1,7 +1,8 @@
 @use "~/styles/helpers" as *;
 
 .ad-edit-header {
-	margin-block: rem(32) rem(18);
+	margin-bottom: rem(18);
+	padding-top: rem(32);
 
   &__title {
     font-weight: 500;

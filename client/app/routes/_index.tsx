@@ -1,10 +1,33 @@
+import BgImageSrc from "~/assets/images/bg-image.jpg";
+
 export function meta() {
   return [
-    { title: "Авито | главная" },
+    { title: "Авито | Главная" },
     { name: "description", content: "Main page" },
   ];
 }
 
 export default function IndexRoute() {
-  return "Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident sapiente autem ex consequuntur tempora sequi, dolorum amet itaque vel impedit."
+  return (
+    <div className="main-page">
+      <img
+        src={BgImageSrc}
+        alt=""
+        className="main-page__image"
+        width={1400}
+        height={800}
+        loading="lazy"
+      />
+
+      <div className="main-page__content">
+        <h1 className="main-page__title">
+          Тестовое задание на стажировку в Авито
+        </h1>
+
+        <a href="/ads" className="main-page__link">
+          Перейти к просмотру
+        </a>
+      </div>
+    </div>
+  );
 }

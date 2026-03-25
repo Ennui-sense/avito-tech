@@ -1,0 +1,62 @@
+@use "./../helpers/" as *;
+
+.main-page {
+  width: 100vw;
+  height: 100vh;
+  color: var(--color-light);
+  font-family: var(--font-family-main-page);
+  font-weight: 600;
+  text-align: center;
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__title {
+    font-family: var(--font-family-main-page);
+    color: var(--color-light);
+    font-size: rem(72);
+    max-width: rem(980);
+		margin-bottom: rem(40);
+  }
+
+	&__link {
+		font-size: rem(36);
+		position: relative;
+
+		&::after {
+			content: "";
+			width: 0;
+			height: rem(5);
+			background-color: var(--color-light);
+			position: absolute;
+			left: 50%;
+			bottom: 0;
+			transform: translateX(-50%);
+			transition-duration: var(--transition-duration);
+		}
+
+		@include hover(false) {
+			&::after {
+				width: 100%;
+			}
+		}
+
+		&:active {
+			opacity: 0.6;
+		}
+	}
+}
+
+::-webkit-scrollbar {
+	width: 0px;
+}
