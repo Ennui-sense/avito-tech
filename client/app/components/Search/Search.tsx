@@ -3,7 +3,7 @@ import "./Search.scss";
 
 import SearchIcon from "~/assets/icons/search.svg?react";
 
-import { useAppDispatch, useAppSelector } from "~/hooks/redux";
+import { useAppDispatch } from "~/hooks/redux";
 import { setSearch } from "~/store/catalogSlice";
 
 import { useState } from "react";

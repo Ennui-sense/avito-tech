@@ -8,6 +8,16 @@
   line-height: 1.57;
   color: var(--color-opacity-85);
 
+	&--error {
+		.select__button {
+			border-color: var(--color-revision);
+		}
+	}
+
+	&__label {
+		margin-bottom: rem(8);
+	}
+
   &__button {
     @include button-reset;
 

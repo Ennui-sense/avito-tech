@@ -4,22 +4,46 @@
   @include button-reset;
   @include flex-center(true);
 
-  height: var(--button-height-large);
+  height: var(--button-height);
   font-size: rem(14);
   color: var(--color-gray);
-	border-radius: var(--border-radius);
-	background-color: var(--color-light);
-	display: flex;
-	column-gap: rem(8);
-	padding-inline: rem(12);
+  border-radius: var(--border-radius);
+  border: rem(1) solid var(--color-gray-alt);
+  background-color: var(--color-light);
+  display: flex;
+  column-gap: rem(8);
+  padding-inline: rem(12);
+  color: var(--color-opacity-85);
+	font-weight: 400;
 
-	&--accent {
-		background-color: var(--color-accent);
-		color: var(--color-light);
-	}
+  &--accent {
+    background-color: var(--color-accent);
+    color: var(--color-light);
+  }
 
-	&--gray {
-		background-color: red;
-		color: var(--color-light);
-	}
+  &--gray {
+    background-color: var(--color-gray-alt);
+    color: var(--color-gray);
+  }
+
+  &--yellow {
+    background-color: var(--color-revision);
+    color: var(--color-revision-light);
+  }
+
+  &--large {
+    height: var(--button-height-large);
+		font-size: rem(16);
+  }
+
+  &--small {
+    height: var(--button-height-small);
+  }
+
+  &--x-small {
+    padding-inline: rem(7);
+    height: var(--button-height-x-small);
+    border-radius: var(--border-radius-x-small);
+    font-family: var(--font-family-accent);
+  }
 }

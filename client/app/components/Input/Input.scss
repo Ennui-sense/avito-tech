@@ -1,24 +1,46 @@
 @use "~/styles/helpers" as *;
 
 .input {
+  display: flex;
+  flex-direction: column;
+  row-gap: rem(8);
+  font-family: var(--font-family-accent);
+  font-size: rem(14);
+  line-height: 1.57;
+
+  &--error {
+    .input__field-input {
+      border-color: var(--color-revision);
+    }
+  }
+
+  &--required-error {
+    font-weight: 400;
+    font-size: rem(12);
+    color: var(--color-error);
+    line-height: 1.67;
+  }
+
   &__field {
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: transparent;
-    height: var(--button-height);
     text-wrap: nowrap;
     width: rem(456);
     position: relative;
 
+    &:not(.input__field-textarea) {
+      height: var(--button-height);
+    }
+
     &--textarea {
       width: rem(950);
-			overflow: hidden;
+			min-height: rem(60);
 
-			.input__field-input {
-				resize: vertical;
-				min-height: rem(60);
-			}
+      .input__field-input {
+        resize: vertical;
+      }
     }
 
     &-input {
@@ -36,6 +58,10 @@
         border-color: var(--color-validate);
         box-shadow: 0 0 0 rem(2) rgba(24, 144, 255, 0.2);
         outline: none;
+      }
+
+      &::placeholder {
+        font-size: rem(14);
       }
     }
 

@@ -13,6 +13,8 @@ import { CATEGORY_OPTIONS, getCategoryFields } from "~/utils/itemConfig";
 import Fieldset from "~/components/Fieldset/Fieldset";
 import Input from "~/components/Input/Input";
 import Select from "~/components/Select/Select";
+import PriceAi from "~/components/PriceAi/PriceAi";
+import Button from "~/components/Button/Button";
 
 interface AdEditContentProps {
   formData: FormDataType;
@@ -20,6 +22,9 @@ interface AdEditContentProps {
   touched: TouchedFields;
   isSaving: boolean;
   isFormChanged: boolean;
+  saveStatus: { type: "success" | "error"; message: string } | null;
+  priceSuggestion: { price: number; comment: string } | null;
+  isSuggestingPrice: boolean;
   onFieldChange: (
     key: "title" | "price" | "description",
     value: string,
@@ -29,6 +34,9 @@ interface AdEditContentProps {
   onParamChange: (key: string, value: string) => void;
   onSave: () => void;
   onCancel: () => void;
+  onSuggestPrice: () => void;
+  onApplySuggestedPrice: () => void;
+  onCancelSuggestedPrice: () => void;
 }
 
 const AdEditContent = ({
@@ -37,12 +45,18 @@ const AdEditContent = ({
   touched,
   isSaving,
   isFormChanged,
+  saveStatus,
+  priceSuggestion,
+  isSuggestingPrice,
   onFieldChange,
   onFieldBlur,
   onCategoryChange,
   onParamChange,
   onSave,
   onCancel,
+  onSuggestPrice,
+  onApplySuggestedPrice,
+  onCancelSuggestedPrice,
 }: AdEditContentProps) => {
   const categoryFields = getCategoryFields(formData.category);
 
@@ -68,7 +82,6 @@ const AdEditContent = ({
             options={CATEGORY_OPTIONS}
             onChange={(value) => onCategoryChange(value as ItemCategory)}
           />
-
           <Fieldset
             className="ad-edit-content__name"
             legend="Название"
@@ -77,17 +90,29 @@ const AdEditContent = ({
             onChange={(value) => onFieldChange("title", value)}
             onBlur={() => onFieldBlur("title")}
             error={touched.title ? errors.title : undefined}
+            required
           />
 
-          <Fieldset
-            className="ad-edit-content__price"
-            legend="Цена"
-            inputType="number"
-            value={formData.price}
-            onChange={(value) => onFieldChange("price", value)}
-            onBlur={() => onFieldBlur("price")}
-            error={touched.price ? errors.price : undefined}
-          />
+          <div className="ad-edit-content__manage-price">
+            <Fieldset
+              className="ad-edit-content__price"
+              legend="Цена"
+              inputType="number"
+              value={formData.price}
+              onChange={(value) => onFieldChange("price", value)}
+              onBlur={() => onFieldBlur("price")}
+              error={touched.price ? errors.price : undefined}
+              required
+            />
+
+            <PriceAi
+              onSuggestPrice={onSuggestPrice}
+              onApplySuggestedPrice={onApplySuggestedPrice}
+              isSuggestingPrice={isSuggestingPrice}
+              priceSuggestion={priceSuggestion}
+              onCancelSuggestedPrice={onCancelSuggestedPrice}
+            ></PriceAi>
+          </div>
 
           <fieldset className="ad-edit-content__characteristics">
             <legend className="ad-edit-content__characteristics-title">
@@ -113,6 +138,7 @@ const AdEditContent = ({
                   className={`fieldset--${field.key}`}
                   onChange={(value) => onParamChange(field.key, value)}
                   isError={isParamFieldEmpty(field.key)}
+                  label={field.label}
                 />
               ),
             )}
@@ -127,22 +153,31 @@ const AdEditContent = ({
           />
 
           <div className="ad-edit-content__actions">
-            <button
-              type="button"
-              onClick={onCancel}
+            {saveStatus && (
+              <div
+                className={`ad-edit-content__notice ad-edit-content__notice--${saveStatus.type}`}
+              >
+                {saveStatus.message}
+              </div>
+            )}
+            <Button
+              variant="accent"
+              size="large"
               className="ad-edit-content__action-button"
-            >
-              Отменить
-            </button>
-
-            <button
-              type="button"
+							disabled={!isFormChanged || isSaving}
               onClick={onSave}
-              disabled={!isFormChanged || isSaving}
-              className="ad-edit-content__action-button"
             >
               {isSaving ? "Сохранение..." : "Сохранить"}
-            </button>
+            </Button>
+
+            <Button
+              variant="gray"
+              size="large"
+              className="ad-edit-content__action-button"
+              onClick={onCancel}
+            >
+              Отменить
+            </Button>
           </div>
         </form>
       </div>

@@ -11,6 +11,7 @@ import type { SelectOption } from "~/types";
 interface SelectProps {
   value: string;
   options: SelectOption[];
+  label?: string;
   className?: string;
   onChange: (value: string) => void;
   isError?: boolean;
@@ -20,8 +21,9 @@ const Select = ({
   value,
   options,
   className,
-  onChange,
   isError,
+  label,
+  onChange,
 }: SelectProps) => {
   const [openDropdown, setOpenDropdown] = useState(false);
 
@@ -42,12 +44,15 @@ const Select = ({
         "select--error": isError,
       })}
     >
+      {label && <p className="select__label">{label}</p>}
+
       <button
         type="button"
         className={clsx("select__button", { active: openDropdown })}
         onClick={manageDropdown}
       >
         {activeOption?.label ?? "Выберите значение"}
+
         <ArrowTopIcon />
       </button>
 

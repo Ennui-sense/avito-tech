@@ -1,40 +1,60 @@
 import clsx from "clsx";
 import "./Button.scss";
 
-import EditIcon from "~/assets/icons/edit.svg?react";
-
 interface ButtonProps {
   className: string;
   children: string;
   href?: string;
-  isEdit?: boolean;
-  variant?: "accent" | "gray";
-	onClick?: () => void;
+  variant?: "accent" | "gray" | "light" | "yellow";
+  disabled?: boolean;
+  onClick?: () => void;
+  Icon?: React.FC<React.SVGProps<SVGSVGElement>>;
+  direction?: "row" | "row-reverse";
+  size?: "default" | "small" | "x-small" | "large";
 }
 
 const Button = ({
   className,
   children,
   href,
-  isEdit,
   variant,
-	onClick
+  disabled,
+  Icon,
+  direction = "row",
+  size = "default",
+  onClick,
 }: ButtonProps) => {
   return href ? (
-    <a href={href} className={clsx("button", className, `button--${variant}`)}>
+    <a
+      href={href}
+      className={clsx(
+        "button",
+        className,
+        `button--${variant}`,
+        `button--${size}`,
+      )}
+      style={{ flexDirection: direction }}
+    >
       {children}
 
-      {isEdit && <EditIcon />}
+      {Icon && <Icon />}
     </a>
   ) : (
     <button
       type="button"
-      className={clsx("button", className, `button--${variant}`)}
-			onClick={onClick}
+      className={clsx(
+        "button",
+        className,
+        `button--${variant}`,
+        `button--${size}`,
+      )}
+      onClick={onClick}
+      disabled={disabled}
+      style={{ flexDirection: direction }}
     >
       {children}
 
-      {isEdit && <EditIcon />}
+      {Icon && <Icon />}
     </button>
   );
 };

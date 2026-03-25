@@ -29,7 +29,8 @@ const Input = ({
   return (
     <div
       className={clsx("input", {
-        "input--error": Boolean(error) || isError,
+        "input--error": isError,
+        "input--required-error": Boolean(error),
       })}
     >
       <label

@@ -1,5 +1,7 @@
 import Fastify from "fastify";
+import "dotenv/config"
 import cors from "@fastify/cors";
+import OpenAI from "openai";
 
 import items from "data/items.json" with { type: "json" };
 import { Item } from "src/types.ts";
@@ -11,6 +13,10 @@ const ITEMS = items as Item[];
 
 const fastify = Fastify({
   logger: true,
+});
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 await fastify.register(cors, {
@@ -108,7 +114,7 @@ fastify.get<ItemsGetRequest>("/items", (request) => {
       })
       .slice(skip, skip + limit)
       .map((item) => ({
-				id: item.id,
+        id: item.id,
         category: item.category,
         title: item.title,
         price: item.price,
@@ -164,6 +170,53 @@ fastify.put<ItemUpdateRequest>("/items/:id", (request, reply) => {
     }
 
     throw error;
+  }
+});
+
+fastify.post("/ai/price-suggestion", async (request, reply) => {
+  try {
+    const body = request.body as {
+      category: string;
+      title: string;
+      description?: string;
+      price?: number | null;
+      params?: Record<string, unknown>;
+    };
+
+    const prompt = `
+Ты помогаешь оценить рыночную цену объявления.
+Ответь строго в JSON формате без markdown:
+{
+  "price": number,
+  "comment": string
+}
+
+Категория: ${body.category}
+Название: ${body.title}
+Описание: ${body.description ?? ""}
+Текущая цена: ${body.price ?? ""}
+Характеристики: ${JSON.stringify(body.params ?? {})}
+
+Оцени разумную рыночную цену в рублях и кратко объясни.
+`;
+
+    const response = await openai.responses.create({
+      model: "gpt-4o-mini",
+      input: prompt,
+    });
+
+    const text =
+      response.output_text ?? '{"suggestedPrice": 0, "comment": "Нет ответа"}';
+
+    const parsed = JSON.parse(text);
+
+    return parsed;
+  } catch (error) {
+    console.error(error);
+    reply.status(500).send({
+      success: false,
+      error: "Ошибка при генерации",
+    });
   }
 });
 

@@ -15,6 +15,7 @@ interface FieldsetProps {
   onChange: (value: string) => void;
   onBlur?: () => void;
   error?: string;
+  required?: boolean;
 }
 
 const Fieldset = ({
@@ -26,9 +27,14 @@ const Fieldset = ({
   onChange,
   onBlur,
   error,
+  required,
 }: FieldsetProps) => {
   return (
-    <fieldset className={clsx("fieldset", className)}>
+    <fieldset
+      className={clsx("fieldset", className, {
+        "fieldset--required": required,
+      })}
+    >
       <legend className="fieldset__legend">{legend}</legend>
 
       {inputType === "select" ? (
@@ -42,8 +48,8 @@ const Fieldset = ({
       ) : (
         <Input
           inputType={inputType}
-          id={legend}
-          label={inputType === "textarea" ? undefined : legend}
+          id={className.split("__").at(-1) as string}
+          label={legend}
           value={value}
           onChange={onChange}
           onBlur={onBlur}

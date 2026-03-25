@@ -3,28 +3,31 @@
 .fieldset {
   position: relative;
 
-  &:not(:last-of-type) {
-    &::after {
-      content: "";
-      width: 100%;
-      height: rem(1);
-      background-color: red;
-      position: absolute;
-      bottom: rem(-18);
-    }
-  }
-
   &__legend {
     font-weight: 600;
     margin-bottom: rem(8);
   }
 
   &--category {
-		max-width: rem(256);
-	}
+    max-width: rem(256);
+  }
 
-	&--type,
-	&--condition {
-		max-width: rem(456);
-	}
+  &--type,
+  &--condition {
+    max-width: rem(456);
+  }
+
+  &--required {
+    .fieldset__legend {
+      display: flex;
+      column-gap: rem(8);
+
+      &::before {
+        content: "*";
+        font-family: var(--font-family-accent);
+        color: var(--color-error);
+        font-weight: 400;
+      }
+    }
+  }
 }

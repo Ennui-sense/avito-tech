@@ -2,7 +2,10 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 
-import { convertItemToFormData, convertFormDataToPut } from "~/utils/itemConfig";
+import {
+  convertItemToFormData,
+  convertFormDataToPut,
+} from "~/utils/itemConfig";
 
 import AdEditHeader from "~/components/AdEditHeader/AdEditHeader";
 import AdEditContent from "~/sections/AdEditContent/AdEditContent";
@@ -19,12 +22,25 @@ export default function AdEditRoute() {
 
   const [item, setItem] = useState<Item | null>(null);
   const [formData, setFormData] = useState<FormDataType | null>(null);
-  const [initialFormData, setInitialFormData] = useState<FormDataType | null>(null);
+  const [initialFormData, setInitialFormData] = useState<FormDataType | null>(
+    null,
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<TouchedFields>({});
+
+  const [priceSuggestion, setPriceSuggestion] = useState<{
+    price: number;
+    comment: string;
+  } | null>(null);
+
+  const [isSuggestingPrice, setIsSuggestingPrice] = useState(false);
 
   useEffect(() => {
     const getItem = async () => {
@@ -44,7 +60,7 @@ export default function AdEditRoute() {
       }
     };
 
-		getItem();
+    getItem();
   }, [id]);
 
   useEffect(() => {
@@ -57,13 +73,12 @@ export default function AdEditRoute() {
 
   const validateField = (key: "title" | "price", value: string) => {
     if (key === "title") {
-      if (!value.trim()) return "Введите название";
+      if (!value.trim()) return "Название должно быть заполнено";
       return "";
     }
 
     if (key === "price") {
-      if (!value.trim()) return "Введите цену";
-      if (Number.isNaN(Number(value))) return "Цена должна быть числом";
+      if (!value.trim()) return "Цена должна быть заполнена";
       if (Number(value) < 0) return "Цена не может быть меньше 0";
       return "";
     }
@@ -159,22 +174,78 @@ export default function AdEditRoute() {
     });
 
     if (titleError || priceError) {
+      setSaveStatus({
+        type: "error",
+        message: "Проверьте обязательные поля перед сохранением",
+      });
       return;
     }
 
     try {
       setIsSaving(true);
+      setSaveStatus(null);
 
       const put = convertFormDataToPut(formData);
       await axios.put(`http://localhost:8080/items/${id}`, put);
 
-      navigate(`/ads/${id}`);
+      setSaveStatus({
+        type: "error",
+        message: "Изменение сохранены",
+      });
+
+      setTimeout(() => {
+        navigate(`/ads/${id}`);
+      }, 1000);
     } catch (error) {
       console.error("Ошибка при сохранении:", error);
+
+      setSaveStatus({
+        type: "error",
+        message:
+          "При попытке сохранить изменения произошла ошибка. Попробуйте ещё раз или зайдите позже.",
+      });
     } finally {
       setIsSaving(false);
     }
   };
+
+  const handleSuggestPrice = async () => {
+    if (!formData) return;
+
+    try {
+      setIsSuggestingPrice(true);
+      setPriceSuggestion(null);
+
+      const payload = convertFormDataToPut(formData);
+
+      const res = await axios.post(
+        "http://localhost:8080/ai/price-suggestion",
+        {
+          ...payload,
+        },
+      );
+
+      setPriceSuggestion(res.data);
+    } catch (error) {
+      console.error("Ошибка при получении рекомендации по цене:", error);
+      setSaveStatus({
+        type: "error",
+        message: "Не удалось получить рекомендацию по цене.",
+      });
+    } finally {
+      setIsSuggestingPrice(false);
+    }
+  };
+
+  const handleApplySuggestedPrice = () => {
+    if (!priceSuggestion) return;
+
+    handleFieldChange("price", String(priceSuggestion.price));
+  };
+
+	const handleCancelSuggestedPrice =() => {
+		setPriceSuggestion(null)
+	}
 
   if (isLoading) {
     return <div>Загрузка...</div>;
@@ -198,12 +269,18 @@ export default function AdEditRoute() {
           touched={touched}
           isSaving={isSaving}
           isFormChanged={isFormChanged}
+          saveStatus={saveStatus}
+          priceSuggestion={priceSuggestion}
+          isSuggestingPrice={isSuggestingPrice}
           onFieldChange={handleFieldChange}
           onFieldBlur={handleFieldBlur}
           onCategoryChange={handleCategoryChange}
           onParamChange={handleParamChange}
           onSave={handleSave}
           onCancel={handleCancel}
+          onSuggestPrice={handleSuggestPrice}
+          onApplySuggestedPrice={handleApplySuggestedPrice}
+					onCancelSuggestedPrice={handleCancelSuggestedPrice}
         />
       </main>
     </>
