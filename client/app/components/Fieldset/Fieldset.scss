@@ -2,6 +2,7 @@
 
 .fieldset {
   position: relative;
+	z-index: -100;
 
   &__legend {
     font-weight: 600;

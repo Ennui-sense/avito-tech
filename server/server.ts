@@ -1,5 +1,5 @@
 import Fastify from "fastify";
-import "dotenv/config"
+import "dotenv/config";
 import cors from "@fastify/cors";
 import OpenAI from "openai";
 
@@ -207,6 +207,52 @@ fastify.post("/ai/price-suggestion", async (request, reply) => {
 
     const text =
       response.output_text ?? '{"suggestedPrice": 0, "comment": "Нет ответа"}';
+
+    const parsed = JSON.parse(text);
+
+    return parsed;
+  } catch (error) {
+    console.error(error);
+    reply.status(500).send({
+      success: false,
+      error: "Ошибка при генерации",
+    });
+  }
+});
+
+fastify.post("/ai/description-suggestion", async (request, reply) => {
+  try {
+    const body = request.body as {
+      category: string;
+      title: string;
+      description?: string;
+      price?: number | null;
+      params?: Record<string, unknown>;
+    };
+
+    const prompt = `
+Ты помогаешь придумать или улучшить описание объявления.
+Ответь строго в JSON формате без markdown:
+{
+  "description": string
+}
+
+Категория: ${body.category}
+Название: ${body.title}
+Текущее описание: ${body.description ?? ""}
+Цена: ${body.price ?? ""}
+Характеристики: ${JSON.stringify(body.params ?? {})}
+
+Составь качественное краткое описание для описания
+`;
+
+    const response = await openai.responses.create({
+      model: "gpt-4o-mini",
+      input: prompt,
+    });
+
+    const text =
+      response.output_text ?? '{"description": "Нет описания"}';
 
     const parsed = JSON.parse(text);
 

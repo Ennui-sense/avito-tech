@@ -39,8 +39,11 @@ export default function AdEditRoute() {
     price: number;
     comment: string;
   } | null>(null);
+  const [descriptionSuggestion, setDescriptionSuggestion] = useState<{
+    description: string;
+  } | null>(null);
 
-  const [isSuggestingPrice, setIsSuggestingPrice] = useState(false);
+  const [isSuggesting, setIsSuggesting] = useState(false);
 
   useEffect(() => {
     const getItem = async () => {
@@ -213,10 +216,12 @@ export default function AdEditRoute() {
     if (!formData) return;
 
     try {
-      setIsSuggestingPrice(true);
+      setIsSuggesting(true);
       setPriceSuggestion(null);
 
       const payload = convertFormDataToPut(formData);
+
+      console.log("sending price payload", payload);
 
       const res = await axios.post(
         "http://localhost:8080/ai/price-suggestion",
@@ -233,19 +238,61 @@ export default function AdEditRoute() {
         message: "Не удалось получить рекомендацию по цене.",
       });
     } finally {
-      setIsSuggestingPrice(false);
+      setIsSuggesting(false);
     }
   };
 
-  const handleApplySuggestedPrice = () => {
-    if (!priceSuggestion) return;
+  const handleSuggestDescription = async () => {
+    if (!formData) return;
 
-    handleFieldChange("price", String(priceSuggestion.price));
+    try {
+      setIsSuggesting(true);
+      setDescriptionSuggestion(null);
+
+      const payload = convertFormDataToPut(formData);
+
+      console.log("sending description payload", payload);
+
+      const res = await axios.post(
+        "http://localhost:8080/ai/description-suggestion",
+        {
+          ...payload,
+        },
+      );
+
+      setDescriptionSuggestion(res.data);
+    } catch (error) {
+      console.error("Ошибка при получении рекомендации по описанию:", error);
+      setSaveStatus({
+        type: "error",
+        message: "Не удалось получить рекомендацию по описанию.",
+      });
+    } finally {
+      setIsSuggesting(false);
+    }
   };
 
-	const handleCancelSuggestedPrice =() => {
-		setPriceSuggestion(null)
-	}
+  const handleApplySuggested = (field: "price" | "description") => {
+    if (field === "price") {
+      if (!priceSuggestion) return;
+      handleFieldChange("price", String(priceSuggestion.price));
+      handleCancelSuggested(field);
+      return;
+    }
+
+    if (!descriptionSuggestion) return;
+    handleFieldChange("description", String(descriptionSuggestion.description));
+    handleCancelSuggested(field);
+  };
+
+  const handleCancelSuggested = (field: "price" | "description") => {
+    if (field === "price") {
+      setPriceSuggestion(null);
+      return;
+    }
+
+    setDescriptionSuggestion(null);
+  };
 
   if (isLoading) {
     return <div>Загрузка...</div>;
@@ -271,7 +318,8 @@ export default function AdEditRoute() {
           isFormChanged={isFormChanged}
           saveStatus={saveStatus}
           priceSuggestion={priceSuggestion}
-          isSuggestingPrice={isSuggestingPrice}
+          descriptionSuggestion={descriptionSuggestion}
+          isSuggesting={isSuggesting}
           onFieldChange={handleFieldChange}
           onFieldBlur={handleFieldBlur}
           onCategoryChange={handleCategoryChange}
@@ -279,8 +327,9 @@ export default function AdEditRoute() {
           onSave={handleSave}
           onCancel={handleCancel}
           onSuggestPrice={handleSuggestPrice}
-          onApplySuggestedPrice={handleApplySuggestedPrice}
-					onCancelSuggestedPrice={handleCancelSuggestedPrice}
+          onSuggestDescription={handleSuggestDescription}
+          onApplySuggested={handleApplySuggested}
+          onCancelSuggested={handleCancelSuggested}
         />
       </main>
     </>

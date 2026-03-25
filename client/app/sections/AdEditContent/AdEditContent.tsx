@@ -13,9 +13,9 @@ import { CATEGORY_OPTIONS, getCategoryFields } from "~/utils/itemConfig";
 import Fieldset from "~/components/Fieldset/Fieldset";
 import Input from "~/components/Input/Input";
 import Select from "~/components/Select/Select";
-import PriceAi from "~/components/PriceAi/PriceAi";
 import Button from "~/components/Button/Button";
 import Notification from "~/components/Notification/Notification";
+import AiHint from "~/components/AiHint/AiHint";
 
 interface AdEditContentProps {
   formData: FormDataType;
@@ -25,7 +25,8 @@ interface AdEditContentProps {
   isFormChanged: boolean;
   saveStatus: { type: "success" | "error"; message: string } | null;
   priceSuggestion: { price: number; comment: string } | null;
-  isSuggestingPrice: boolean;
+  descriptionSuggestion: { description: string } | null;
+  isSuggesting: boolean;
   onFieldChange: (
     key: "title" | "price" | "description",
     value: string,
@@ -36,8 +37,9 @@ interface AdEditContentProps {
   onSave: () => void;
   onCancel: () => void;
   onSuggestPrice: () => void;
-  onApplySuggestedPrice: () => void;
-  onCancelSuggestedPrice: () => void;
+  onSuggestDescription: () => void;
+  onApplySuggested: (field: "price" | "description") => void;
+  onCancelSuggested: (field: "price" | "description") => void;
 }
 
 const AdEditContent = ({
@@ -48,7 +50,8 @@ const AdEditContent = ({
   isFormChanged,
   saveStatus,
   priceSuggestion,
-  isSuggestingPrice,
+  descriptionSuggestion,
+  isSuggesting,
   onFieldChange,
   onFieldBlur,
   onCategoryChange,
@@ -56,8 +59,9 @@ const AdEditContent = ({
   onSave,
   onCancel,
   onSuggestPrice,
-  onApplySuggestedPrice,
-  onCancelSuggestedPrice,
+  onSuggestDescription,
+  onApplySuggested,
+  onCancelSuggested,
 }: AdEditContentProps) => {
   const categoryFields = getCategoryFields(formData.category);
 
@@ -106,13 +110,15 @@ const AdEditContent = ({
               required
             />
 
-            <PriceAi
+            <AiHint
               onSuggestPrice={onSuggestPrice}
-              onApplySuggestedPrice={onApplySuggestedPrice}
-              isSuggestingPrice={isSuggestingPrice}
+              onApplySuggested={() => onApplySuggested("price")}
+              isSuggesting={isSuggesting}
               priceSuggestion={priceSuggestion}
-              onCancelSuggestedPrice={onCancelSuggestedPrice}
-            ></PriceAi>
+              onCancelSuggested={() => onCancelSuggested("price")}
+              initialText="Узнать рыночную цену"
+              field="price"
+            />
           </div>
 
           <fieldset className="ad-edit-content__characteristics">
@@ -145,13 +151,25 @@ const AdEditContent = ({
             )}
           </fieldset>
 
-          <Fieldset
-            className="ad-edit-content__description"
-            legend="Описание"
-            inputType="textarea"
-            value={formData.description}
-            onChange={(value) => onFieldChange("description", value)}
-          />
+          <div className="ad-edit-content__manage-description">
+            <Fieldset
+              className="ad-edit-content__description"
+              legend="Описание"
+              inputType="textarea"
+              value={formData.description}
+              onChange={(value) => onFieldChange("description", value)}
+            />
+
+            <AiHint
+              onSuggestDescription={onSuggestDescription}
+              onApplySuggested={() => onApplySuggested("description")}
+              isSuggesting={isSuggesting}
+              descriptionSuggestion={descriptionSuggestion}
+              onCancelSuggested={() => onCancelSuggested("description")}
+              initialText={formData.description ? "Улучшить описание" : "Придумать описание"}
+              field="description"
+            />
+          </div>
 
           <div className="ad-edit-content__actions">
             {saveStatus && (
