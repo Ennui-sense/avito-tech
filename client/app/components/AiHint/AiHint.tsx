@@ -81,6 +81,7 @@ const AiHint = ({
               className="ai-hint__suggestion-button"
               onClick={onCancelSuggested}
               size="x-small"
+							border={true}
             >
               Закрыть
             </Button>

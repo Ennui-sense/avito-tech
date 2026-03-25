@@ -26,7 +26,8 @@ interface AdEditContentProps {
   saveStatus: { type: "success" | "error"; message: string } | null;
   priceSuggestion: { price: number; comment: string } | null;
   descriptionSuggestion: { description: string } | null;
-  isSuggesting: boolean;
+  isPriceSuggesting: boolean;
+  isDescriptionSuggesting: boolean;
   onFieldChange: (
     key: "title" | "price" | "description",
     value: string,
@@ -51,7 +52,8 @@ const AdEditContent = ({
   saveStatus,
   priceSuggestion,
   descriptionSuggestion,
-  isSuggesting,
+  isPriceSuggesting,
+	isDescriptionSuggesting,
   onFieldChange,
   onFieldBlur,
   onCategoryChange,
@@ -113,7 +115,7 @@ const AdEditContent = ({
             <AiHint
               onSuggestPrice={onSuggestPrice}
               onApplySuggested={() => onApplySuggested("price")}
-              isSuggesting={isSuggesting}
+              isSuggesting={isPriceSuggesting}
               priceSuggestion={priceSuggestion}
               onCancelSuggested={() => onCancelSuggested("price")}
               initialText="Узнать рыночную цену"
@@ -163,7 +165,7 @@ const AdEditContent = ({
             <AiHint
               onSuggestDescription={onSuggestDescription}
               onApplySuggested={() => onApplySuggested("description")}
-              isSuggesting={isSuggesting}
+              isSuggesting={isDescriptionSuggesting}
               descriptionSuggestion={descriptionSuggestion}
               onCancelSuggested={() => onCancelSuggested("description")}
               initialText={formData.description ? "Улучшить описание" : "Придумать описание"}

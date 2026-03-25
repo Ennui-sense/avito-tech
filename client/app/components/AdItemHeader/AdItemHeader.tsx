@@ -41,14 +41,19 @@ const AdsItemHeader = ({
           <p className="ad-item-header__price">{formatPrice(price)}</p>
         </div>
         <div className="ad-item-header__bottom">
-          <Button
-            className="ad-item-header__button"
-            href={`/ads/${id}/edit`}
-            variant="accent"
-            isEdit
-          >
-            Редактировать
-          </Button>
+          <div className="ad-item-header__actions">
+            <a href="/ads" className="ad-item-header__back-link">
+              К моим объявлениям
+            </a>
+
+            <Button
+              className="ad-item-header__edit-link"
+              href={`/ads/${id}/edit`}
+              variant="accent"
+            >
+              Редактировать
+            </Button>
+          </div>
 
           <div className="ad-item-header__time">
             <p className="ad-item-header__created">

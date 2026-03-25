@@ -4,20 +4,20 @@
   margin-bottom: rem(36);
 
   &__inner {
-		padding-block: rem(32);
-		position: relative;
+    padding-block: rem(32);
+    position: relative;
 
-		&::after {
-			content: "";
-			width: calc(100% - var(--container-padding-x) * 2);
-			display: flex;
-			height: rem(1);
-			background-color: var(--color-gray-input);
-			position: absolute;
-			left: 50%;
-			transform: translateX(-50%);
-			bottom: 0;
-		}
+    &::after {
+      content: "";
+      width: calc(100% - var(--container-padding-x) * 2);
+      display: flex;
+      height: rem(1);
+      background-color: var(--color-gray-input);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+    }
   }
 
   &__top {
@@ -40,6 +40,25 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  &__back-link {
+    color: var(--color-gray);
+
+		@include hover(false) {
+			text-decoration: underline;
+		}
+
+		&:active {
+			opacity: 0.6;
+		}
+  }
+
+  &__actions {
+  	display: flex;
+		flex-direction: column;
+  	align-items: start;
+  	row-gap: rem(10);
   }
 
   &__time {

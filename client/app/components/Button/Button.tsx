@@ -11,6 +11,7 @@ interface ButtonProps {
   Icon?: React.FC<React.SVGProps<SVGSVGElement>>;
   direction?: "row" | "row-reverse";
   size?: "default" | "small" | "x-small" | "large";
+  border?: boolean;
 }
 
 const Button = ({
@@ -22,6 +23,7 @@ const Button = ({
   Icon,
   direction = "row",
   size = "default",
+  border = false,
   onClick,
 }: ButtonProps) => {
   return href ? (
@@ -32,6 +34,7 @@ const Button = ({
         className,
         `button--${variant}`,
         `button--${size}`,
+        { "button--border": border },
       )}
       style={{ flexDirection: direction }}
     >
@@ -47,6 +50,7 @@ const Button = ({
         className,
         `button--${variant}`,
         `button--${size}`,
+        { "button--border": border, "button--disabled": disabled },
       )}
       onClick={onClick}
       disabled={disabled}

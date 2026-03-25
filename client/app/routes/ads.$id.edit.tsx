@@ -43,7 +43,8 @@ export default function AdEditRoute() {
     description: string;
   } | null>(null);
 
-  const [isSuggesting, setIsSuggesting] = useState(false);
+  const [isPriceSuggesting, setIsPriceSuggesting] = useState(false);
+  const [isDescriptionSuggesting, setIsDescriptionSuggesting] = useState(false);
 
   useEffect(() => {
     const getItem = async () => {
@@ -216,7 +217,7 @@ export default function AdEditRoute() {
     if (!formData) return;
 
     try {
-      setIsSuggesting(true);
+      setIsPriceSuggesting(true);
       setPriceSuggestion(null);
 
       const payload = convertFormDataToPut(formData);
@@ -236,7 +237,7 @@ export default function AdEditRoute() {
         message: "Не удалось получить рекомендацию по цене.",
       });
     } finally {
-      setIsSuggesting(false);
+      setIsPriceSuggesting(false);
     }
   };
 
@@ -244,7 +245,7 @@ export default function AdEditRoute() {
     if (!formData) return;
 
     try {
-      setIsSuggesting(true);
+      setIsDescriptionSuggesting(true);
       setDescriptionSuggestion(null);
 
       const payload = convertFormDataToPut(formData);
@@ -264,7 +265,7 @@ export default function AdEditRoute() {
         message: "Не удалось получить рекомендацию по описанию.",
       });
     } finally {
-      setIsSuggesting(false);
+      setIsDescriptionSuggesting(false);
     }
   };
 
@@ -315,7 +316,8 @@ export default function AdEditRoute() {
           saveStatus={saveStatus}
           priceSuggestion={priceSuggestion}
           descriptionSuggestion={descriptionSuggestion}
-          isSuggesting={isSuggesting}
+          isPriceSuggesting={isPriceSuggesting}
+          isDescriptionSuggesting={isDescriptionSuggesting}
           onFieldChange={handleFieldChange}
           onFieldBlur={handleFieldBlur}
           onCategoryChange={handleCategoryChange}

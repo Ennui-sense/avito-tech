@@ -37,7 +37,7 @@ const Filters = () => {
         </div>
       </div>
 
-      <Button className="filters__button" onClick={() => dispatch(resetFilters())}>
+      <Button className="filters__button" onClick={() => dispatch(resetFilters())} size="large">
         Сбросить фильтры
       </Button>
     </aside>

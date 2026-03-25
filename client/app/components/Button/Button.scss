@@ -8,45 +8,64 @@
   font-size: rem(14);
   color: var(--color-gray);
   border-radius: var(--border-radius);
-  border: rem(1) solid var(--color-gray-alt);
   background-color: var(--color-light);
   display: flex;
   column-gap: rem(8);
   padding-inline: rem(12);
   color: var(--color-opacity-85);
   font-weight: 400;
+  color: var(--color-gray);
 
+  @include hover(false) {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.4;
+  }
+
+	
+	&--border {
+		border: rem(1) solid var(--color-gray);
+	}
+	
   &--accent {
-    background-color: var(--color-accent);
+		background-color: var(--color-accent);
     color: var(--color-light);
     border: none;
   }
-
+	
   &--gray {
-    background-color: var(--color-gray-alt);
+		background-color: var(--color-gray-alt);
     color: var(--color-gray);
     border: none;
   }
-
+	
+	&--disabled {
+		background-color: var(--color-gray-alt);
+		color: var(--color-light);
+	}
+	
   &--yellow {
-    background-color: var(--color-revision-light);
+		background-color: var(--color-revision-light);
     color: var(--color-revision);
     border: none;
   }
-
+	
   &--large {
-    height: var(--button-height-large);
+		height: var(--button-height-large);
     font-size: rem(16);
   }
-
+	
   &--small {
-    height: var(--button-height-small);
+		height: var(--button-height-small);
   }
-
+	
   &--x-small {
-    padding-inline: rem(7);
+		padding-inline: rem(7);
     height: var(--button-height-x-small);
     border-radius: var(--border-radius-x-small);
     font-family: var(--font-family-accent);
   }
+
 }
