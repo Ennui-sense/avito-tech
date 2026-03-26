@@ -21,7 +21,10 @@ export default function IndexRoute() {
 
       <div className="main-page__content">
         <h1 className="main-page__title">
-          Тестовое задание на стажировку в Авито
+          Тестовое задание на
+          <br />
+          стажировку
+          <br /> в Авито
         </h1>
 
         <a href="/ads" className="main-page__link">

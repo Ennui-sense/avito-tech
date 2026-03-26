@@ -20,11 +20,7 @@ const Filters = () => {
 
         <div className="filters__types">
           {FiltersTypesData.map(({ id, label, variants }) => (
-            <FiltersType
-              key={id}
-              label={label}
-              variants={variants}
-            />
+            <FiltersType key={id} label={label} variants={variants} />
           ))}
         </div>
 
@@ -37,7 +33,11 @@ const Filters = () => {
         </div>
       </div>
 
-      <Button className="filters__button" onClick={() => dispatch(resetFilters())} size="large">
+      <Button
+        className="filters__button"
+        onClick={() => dispatch(resetFilters())}
+        size="large"
+      >
         Сбросить фильтры
       </Button>
     </aside>

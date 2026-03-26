@@ -48,6 +48,7 @@ const FiltersType = ({ label, variants }: FiltersTypeProps) => {
         onClick={chooseFilters}
         data={variants}
         isOpen={openDropdown}
+				selectedValues={selectedValues}
       />
     </div>
   );

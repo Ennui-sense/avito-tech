@@ -9,35 +9,44 @@ interface FiltersDropdownProps {
   onClick: (variant: IFilterVariant) => void;
   data: IFilterVariant[];
   isOpen: boolean;
+  selectedValues: string[];
 }
 
-const FiltersDropdown = ({ onClick, data, isOpen }: FiltersDropdownProps) => {
-  const filterDropdownRef = useRef<HTMLDivElement | null>(null);
+const FiltersDropdown = ({
+  onClick,
+  data,
+  isOpen,
+  selectedValues,
+}: FiltersDropdownProps) => {
+  const filtersDropdownRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <div
-      className="filter-dropdown"
+      className="filters-dropdown"
       style={
         isOpen
-          ? { height: filterDropdownRef.current?.scrollHeight }
+          ? { height: filtersDropdownRef.current?.scrollHeight }
           : { height: "0px" }
       }
     >
-      <div className={clsx("filter-dropdown__body")} ref={filterDropdownRef}>
-        {data.map((filter) => (
-          <div className="filter-dropdown__field" key={filter.id}>
-            <input
-              type="checkbox"
-              name={filter.value}
-              id={filter.value}
-              className="filter-dropdown__input"
+      <div className={clsx("filters-dropdown__body")} ref={filtersDropdownRef}>
+        {data.map((filter) => {
+          const isSelected = selectedValues.includes(filter.value);
+
+          return (
+            <button
+              type="button"
+              className={clsx("filters-dropdown__button", {
+                active: isSelected,
+              })}
+              key={filter.id}
               onClick={() => onClick(filter)}
-            />
-            <label htmlFor={filter.value} className="filter-dropdown__label">
+            >
+							<span className="filters-dropdown__button-field"></span>
               {filter.label}
-            </label>
-          </div>
-        ))}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
