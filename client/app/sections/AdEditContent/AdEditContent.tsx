@@ -17,6 +17,8 @@ import Button from "~/components/Button/Button";
 import Notification from "~/components/Notification/Notification";
 import AiHint from "~/components/AiHint/AiHint";
 
+import { useEffect } from "react";
+
 interface AdEditContentProps {
   formData: FormDataType;
   errors: FormErrors;
@@ -53,7 +55,7 @@ const AdEditContent = ({
   priceSuggestion,
   descriptionSuggestion,
   isPriceSuggesting,
-	isDescriptionSuggesting,
+  isDescriptionSuggesting,
   onFieldChange,
   onFieldBlur,
   onCategoryChange,
@@ -168,7 +170,11 @@ const AdEditContent = ({
               isSuggesting={isDescriptionSuggesting}
               descriptionSuggestion={descriptionSuggestion}
               onCancelSuggested={() => onCancelSuggested("description")}
-              initialText={formData.description ? "Улучшить описание" : "Придумать описание"}
+              initialText={
+                formData.description
+                  ? "Улучшить описание"
+                  : "Придумать описание"
+              }
               field="description"
             />
           </div>

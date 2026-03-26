@@ -12,6 +12,7 @@ interface ButtonProps {
   direction?: "row" | "row-reverse";
   size?: "default" | "small" | "x-small" | "large";
   border?: boolean;
+  largePaddingInline?: boolean;
 }
 
 const Button = ({
@@ -24,6 +25,7 @@ const Button = ({
   direction = "row",
   size = "default",
   border = false,
+  largePaddingInline = false,
   onClick,
 }: ButtonProps) => {
   return href ? (
@@ -34,7 +36,7 @@ const Button = ({
         className,
         `button--${variant}`,
         `button--${size}`,
-        { "button--border": border },
+        { "button--border": border, "button--disabled": disabled },
       )}
       style={{ flexDirection: direction }}
     >
@@ -50,7 +52,11 @@ const Button = ({
         className,
         `button--${variant}`,
         `button--${size}`,
-        { "button--border": border, "button--disabled": disabled },
+        {
+          "button--border": border,
+          "button--disabled": disabled,
+          "button--large-padding-inline": largePaddingInline,
+        },
       )}
       onClick={onClick}
       disabled={disabled}

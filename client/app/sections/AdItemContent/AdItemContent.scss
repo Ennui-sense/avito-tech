@@ -1,14 +1,16 @@
 @use "~/styles/helpers" as *;
 
 .ad-item-content {
-	&__inner {
-		display: flex;
-		flex-direction: column;
-		row-gap: rem(32);
-	}
+  padding-bottom: rem(36);
+	
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(32);
+  }
 
-	&__body {
-		display: flex;
-		column-gap: rem(32);
-	}
+  &__body {
+    display: flex;
+    column-gap: rem(32);
+  }
 }

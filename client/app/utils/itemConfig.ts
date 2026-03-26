@@ -144,7 +144,10 @@ export const convertItemToFormData = (item: Item): FormDataType => {
     price: item.price !== null ? String(item.price) : "",
     description: item.description ?? "",
     params: Object.fromEntries(
-      Object.entries(item.params).map(([key, value]) => [key, String(value ?? "")]),
+      Object.entries(item.params).map(([key, value]) => [
+        key,
+        String(value ?? ""),
+      ]),
     ),
   };
 };
@@ -160,6 +163,7 @@ const NUMERIC_PARAM_KEYS = [
 export const convertFormDataToPut = (formData: FormDataType) => {
   const params = Object.fromEntries(
     Object.entries(formData.params)
+      .filter(([, value]) => String(value).trim() !== "")
       .map(([key, value]) => {
         if (NUMERIC_PARAM_KEYS.includes(key)) {
           return [key, Number(value)];

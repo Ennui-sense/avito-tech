@@ -68,7 +68,6 @@ const catalogSlice = createSlice({
     },
 
     resetFilters(state) {
-      state.search = "";
       state.categories = [];
       state.needsRevision = false;
       state.sort = "new";

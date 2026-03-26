@@ -17,6 +17,8 @@
   margin-bottom: rem(36);
 
   & svg {
+		@include square(rem(18));
+		
     color: var(--color-revision);
   }
 

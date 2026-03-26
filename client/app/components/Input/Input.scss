@@ -76,6 +76,10 @@
 
       position: absolute;
       right: rem(0);
+
+			& svg {
+				@include square(rem(14))
+			}
     }
   }
 }

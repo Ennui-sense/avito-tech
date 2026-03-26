@@ -21,7 +21,7 @@ const openai = new OpenAI({
 
 await fastify.register(cors, {
   origin: "*",
-  methods: ["GET", "PUT", "OPTIONS"],
+  methods: ["GET", "PUT", "OPTIONS", "POST"],
   allowedHeaders: ["Content-Type"],
 });
 

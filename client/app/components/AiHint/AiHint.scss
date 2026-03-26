@@ -7,10 +7,11 @@
 		background-color: var(--color-light);
     box-shadow: 0 rem(2) rem(8) 0 rgba(0, 0, 0, 0.15);
     position: absolute;
-    top: 0;
+    top: rem(-7);
     width: rem(330);
     transform: translateY(-100%);
     padding: rem(8);
+		border-radius: var(--border-radius);
     font-family: var(--font-family-accent);
     font-size: rem(12);
     line-height: 1.33;
@@ -20,6 +21,18 @@
 		flex-direction: column;
 		row-gap: rem(8);
 		z-index: 100;
+
+		&::after {
+			@include square(rem(8));
+
+			content: "";
+			border-radius: rem(2);
+			background-color: inherit;
+			transform: rotate(45deg);
+			position: absolute;
+			bottom: rem(-4);
+			left: rem(14);
+		}
 
     &-title {
 			font-weight: 500;

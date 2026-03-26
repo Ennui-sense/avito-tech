@@ -44,6 +44,7 @@ const AiHint = ({
         }
         variant="yellow"
         direction="row-reverse"
+				largePaddingInline
       >
         {hasSuggetion
           ? "Повторить запрос"

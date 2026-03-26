@@ -1,13 +1,15 @@
 @use "~/styles/helpers" as *;
 
 .ad-edit-content {
-	&__form {
-		display: flex;
+	padding-bottom: rem(36);
+
+  &__form {
+    display: flex;
     flex-direction: column;
     row-gap: rem(36);
-		
+
     & > :not(:nth-last-child(2)):not(:last-child) {
-			position: relative;
+      position: relative;
 
       &::after {
         content: "";
@@ -16,8 +18,8 @@
         background-color: var(--color-gray-input);
         position: absolute;
         bottom: rem(-18);
-				display: flex;
-				z-index: -1;
+        display: flex;
+        z-index: -1;
       }
     }
   }
@@ -35,7 +37,7 @@
 
   &__manage-price {
     display: flex;
-		column-gap: rem(24);
+    column-gap: rem(24);
     align-items: end;
 
     &:has(.input__error) {
@@ -45,7 +47,7 @@
 
   &__manage-description {
     display: flex;
-		flex-direction: column;
+    flex-direction: column;
     row-gap: rem(8);
   }
 
@@ -53,11 +55,10 @@
     display: flex;
     column-gap: rem(10);
 
-		&-notification {
-			position: absolute;
-			top: rem(40);
-			right: 0;
-
-		}
+    &-notification {
+      position: fixed;
+      top: rem(40);
+      right: rem(20);
+    }
   }
 }

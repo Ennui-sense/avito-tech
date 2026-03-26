@@ -14,6 +14,12 @@ interface InputProps {
   isError?: boolean;
 }
 
+const preventInvalidKeys = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  if (["e", "E", "+", "-"].includes(e.key)) {
+    e.preventDefault();
+  }
+};
+
 const Input = ({
   inputType,
   label,
@@ -64,10 +70,12 @@ const Input = ({
             value={value}
             onChange={(event) => onChange(event.target.value)}
             onBlur={onBlur}
+            inputMode={inputType === "number" ? "numeric" : undefined}
+            onKeyDown={preventInvalidKeys}
           />
         )}
 
-        {((inputType !== "textarea") && value) && (
+        {inputType !== "textarea" && value && (
           <button
             type="button"
             className="input__field-button"

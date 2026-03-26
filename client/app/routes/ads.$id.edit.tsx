@@ -75,6 +75,16 @@ export default function AdEditRoute() {
     }
   }, [item, isLoading]);
 
+  useEffect(() => {
+    if (saveStatus?.type !== "error") return;
+
+    const timer = setTimeout(() => {
+      setSaveStatus(null);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [saveStatus]);
+
   const validateField = (key: "title" | "price", value: string) => {
     if (key === "title") {
       if (!value.trim()) return "Название должно быть заполнено";
@@ -83,7 +93,7 @@ export default function AdEditRoute() {
 
     if (key === "price") {
       if (!value.trim()) return "Цена должна быть заполнена";
-      if (Number(value) < 0) return "Цена не может быть меньше 0";
+      if (Number(value) <= 0) return "Цена не может быть меньше 0";
       return "";
     }
   };
@@ -155,9 +165,11 @@ export default function AdEditRoute() {
   };
 
   const handleCancel = () => {
+    if (!id) return;
+
     if (isFormChanged) {
       const isConfirmed = window.confirm(
-        "У вас есть несохранённые изменения. Если вы уйдёте со страницы, они будут потеряны. Продолжить?",
+        "У вас есть несохранённые изменения. Если вы уйдёте со страницы, они будут потеряны. Хотите продолжить?",
       );
 
       if (!isConfirmed) {
@@ -196,8 +208,9 @@ export default function AdEditRoute() {
       setIsSaving(true);
       setSaveStatus(null);
 
-      const put = convertFormDataToPut(formData);
-      await axios.put(`http://localhost:8080/items/${id}`, put);
+      const payload = convertFormDataToPut(formData);
+			console.log("PUT payload:", payload);
+      await axios.put(`http://localhost:8080/items/${id}`, payload);
 
       setSaveStatus({
         type: "success",
