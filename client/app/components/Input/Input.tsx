@@ -67,7 +67,7 @@ const Input = ({
           />
         )}
 
-        {inputType !== "textarea" && (
+        {((inputType !== "textarea") && value) && (
           <button
             type="button"
             className="input__field-button"

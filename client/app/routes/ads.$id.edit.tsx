@@ -155,10 +155,17 @@ export default function AdEditRoute() {
   };
 
   const handleCancel = () => {
-    if (!initialFormData) return;
-    setFormData(initialFormData);
-    setErrors({});
-    setTouched({});
+    if (isFormChanged) {
+      const isConfirmed = window.confirm(
+        "У вас есть несохранённые изменения. Если вы уйдёте со страницы, они будут потеряны. Продолжить?",
+      );
+
+      if (!isConfirmed) {
+        return;
+      }
+    }
+
+    navigate(`/ads/${id}`);
   };
 
   const handleSave = async () => {
