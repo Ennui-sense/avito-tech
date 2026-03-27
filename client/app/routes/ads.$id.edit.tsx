@@ -46,6 +46,10 @@ export default function AdEditRoute() {
   const [isPriceSuggesting, setIsPriceSuggesting] = useState(false);
   const [isDescriptionSuggesting, setIsDescriptionSuggesting] = useState(false);
 
+  const isFormChanged =
+    initialFormData !== null &&
+    JSON.stringify(formData) !== JSON.stringify(initialFormData);
+
   useEffect(() => {
     const getItem = async () => {
       try {
@@ -84,6 +88,20 @@ export default function AdEditRoute() {
 
     return () => clearTimeout(timer);
   }, [saveStatus]);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (!isFormChanged) return;
+
+      event.preventDefault();
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [isFormChanged]);
 
   const validateField = (key: "title" | "price", value: string) => {
     if (key === "title") {
@@ -209,7 +227,7 @@ export default function AdEditRoute() {
       setSaveStatus(null);
 
       const payload = convertFormDataToPut(formData);
-			console.log("PUT payload:", payload);
+      console.log("PUT payload:", payload);
       await axios.put(`http://localhost:8080/items/${id}`, payload);
 
       setSaveStatus({
@@ -318,10 +336,6 @@ export default function AdEditRoute() {
   if (!item || !formData) {
     return <div>Объявление не найдено</div>;
   }
-
-  const isFormChanged =
-    initialFormData !== null &&
-    JSON.stringify(formData) !== JSON.stringify(initialFormData);
 
   return (
     <>
